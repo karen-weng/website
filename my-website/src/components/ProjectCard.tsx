@@ -53,25 +53,34 @@ const ProjectCard = ({ title, description, techStack, links, image }: ProjectCar
           ))}
         </div>
         <div style={{ marginTop: '12px' }}>
-          {links.map(link => (
+            {links.map(link => (
             <a 
-              key={link.label} 
-              href={link.url} 
-              target="_blank" 
-              rel="noopener noreferrer"
-              style={{
+                key={link.label} 
+                href={link.url} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                style={{
                 display: 'inline-block',
                 margin: '0 8px 8px 0',
                 padding: '8px 16px',
                 backgroundColor: '#007bff',
                 color: '#fff',
                 borderRadius: '8px',
-                textDecoration: 'none'
-              }}
+                textDecoration: 'none',
+                cursor: 'pointer', // ✅ Shows pointer on hover
+                transition: 'background-color 0.3s ease' // ✅ Smooth hover effect
+                }}
+                onMouseEnter={(e) => {
+                (e.target as HTMLAnchorElement).style.backgroundColor = '#0056b3'; // ✅ Darker on hover
+                }}
+                onMouseLeave={(e) => {
+                (e.target as HTMLAnchorElement).style.backgroundColor = '#007bff'; // ✅ Revert on leave
+                }}
             >
-              {link.label}
+                {link.label}
             </a>
-          ))}
+            ))}
+
         </div>
       </div>
     </div>

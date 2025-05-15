@@ -12,15 +12,19 @@
 
 // src/pages/Personal.tsx
 // import React from "react";
+// import React from "react";
+import { MapWithPins } from "../components/MapPins";
 import { BucketList } from "../components/BucketList";
 
 const Personal = () => {
   return (
     <div style={{ padding: "16px" }}>
       <h1>Personal Section</h1>
+      <MapWithPins />
       <BucketList />
     </div>
   );
 };
 
 export default Personal;
+

@@ -23,7 +23,7 @@
     "completed": false,
     "subtasks": [
       { "id": 19.1, "text": "Ethiopian", "completed": false },
-      { "id": 19.2, "text": "Vietnamese", "completed": false },
+      { "id": 19.2, "text": "Vietnamese", "completed": true },
       { "id": 19.3, "text": "Turkish", "completed": false }
     ]
   },

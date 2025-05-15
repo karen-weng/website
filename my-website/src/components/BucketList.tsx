@@ -71,28 +71,30 @@ export const BucketList = () => {
             </div>
 
             {/* Render Subtasks if Present */}
-            {item.subtasks && (
-              <ul style={{ listStyle: "none", paddingLeft: "24px", marginTop: "8px" }}>
-                {item.subtasks.map(sub => (
-                  <li key={sub.id} style={{ marginBottom: "4px" }}>
-                    <input
-                      type="checkbox"
-                      checked={sub.completed}
-                      onChange={() => toggleSubtask(item.id, sub.id)}
-                      style={{ marginRight: "8px" }}
-                    />
-                    <span
-                      style={{
-                        textDecoration: sub.completed ? "line-through" : "none",
-                        color: sub.completed ? "#888" : "#000"
-                      }}
-                    >
-                      {sub.text}
-                    </span>
-                  </li>
-                ))}
-              </ul>
-            )}
+                {item.subtasks && (
+                <ul style={{ listStyle: "none", paddingLeft: "24px", marginTop: "8px" }}>
+                    {[...item.subtasks]
+                    .sort((a, b) => Number(a.completed) - Number(b.completed))
+                    .map(sub => (
+                        <li key={sub.id} style={{ marginBottom: "4px" }}>
+                        <input
+                            type="checkbox"
+                            checked={sub.completed}
+                            onChange={() => toggleSubtask(item.id, sub.id)}
+                            style={{ marginRight: "8px" }}
+                        />
+                        <span
+                            style={{
+                            textDecoration: sub.completed ? "line-through" : "none",
+                            color: sub.completed ? "#888" : "#000"
+                            }}
+                        >
+                            {sub.text}
+                        </span>
+                        </li>
+                    ))}
+                </ul>
+                )}
           </li>
         ))}
       </ul>

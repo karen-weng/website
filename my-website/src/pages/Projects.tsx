@@ -1,47 +1,62 @@
-// import React, { useState } from 'react';
-
-// const Projects = () => {
-//   const [projects] = useState(['Portfolio Website', 'Weather App', 'Chat Bot']);
-//   const [selected, setSelected] = useState<string | null>(null);
-
-//   return (
-//     <div style={{ textAlign: 'center', padding: '2rem' }}>
-//       <h1>My Projects</h1>
-//       <ul style={{ listStyle: 'none', padding: 0 }}>
-//         {projects.map((project) => (
-//           <li key={project}>
-//             <button
-//               onClick={() => setSelected(project)}
-//               style={{
-//                 padding: '10px 20px',
-//                 margin: '0.5rem',
-//                 backgroundColor: '#10b981',
-//                 color: 'white',
-//                 border: 'none',
-//                 borderRadius: '8px',
-//                 cursor: 'pointer'
-//               }}
-//             >
-//               {project}
-//             </button>
-//           </li>
-//         ))}
-//       </ul>
-//       {selected && <p>You selected: <strong>{selected}</strong></p>}
-//     </div>
-//   );
-// };
-
-// export default Projects;
+import ProjectCard from '../components/ProjectCard';
+// import reactImg from '../assets/react.svg';
+import pomodoroImg from '../assets/pomodoro.png';
+import mixerImg from '../assets/295pcb.png';
+import makeuoftImg from '../assets/primepongpaddle.png';
 
 
-// import React from 'react';
+
+const projects = [
+  {
+    title: 'Radio Receiver',
+    description: '295 project',
+    techStack: ['Altium'],
+    links: [{ label: 'GitHub', url: 'https://github.com/WhosMadeer/ece295' }],
+    image: mixerImg 
+  },
+  {
+    title: 'Pomodoro Timer',
+    description: 'A productivity timer built on FPGA.',
+    techStack: ['RISC-V', 'DE1-SoC', 'GDB', 'Powershell'],
+    links: [
+      { label: 'GitHub', url: 'https://github.com/karen-weng/Pomodoro' },
+      { label: 'Demo', url: 'https://www.youtube.com/watch?v=0ngW_dFM08A' }
+    ],
+    image: pomodoroImg
+  },
+
+  {
+    title: 'MakeUofT Hackathon Project',
+    description: 'Built during XYZ Hackathon.',
+    techStack: ['ESP32', 'MPU5060'],
+    links: [
+    { label: 'Devpost', url: 'https://devpost.com/software/primepong' },
+      { label: 'GitHub', url: 'https://github.com/karen-weng/prime-pong' }
+      
+    ],
+    image: makeuoftImg
+  },
+
+];
 
 const Projects = () => (
   <div style={{ textAlign: 'center', padding: '2rem' }}>
     <h1>My Projects</h1>
     <p>Here are some cool projects I've worked on!</p>
+    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1.5rem', marginTop: '2rem' }}>
+      {projects.map(project => (
+        <ProjectCard 
+            key={project.title} 
+            title={project.title} 
+            description={project.description} 
+            techStack={project.techStack} 
+            links={project.links} 
+            image={project.image}  
+        />
+      ))}
+    </div>
   </div>
 );
+
 
 export default Projects;

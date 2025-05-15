@@ -1,55 +1,103 @@
-// src/components/BucketList.tsx
 import React, { useState } from "react";
+import data from "../data/bucketList.json";
 
-const initialItems = [
-  { id: 1, text: "Travel to Japan", completed: false },
-  { id: 2, text: "Learn Guitar", completed: false },
-  { id: 3, text: "Run a Marathon", completed: false },
-];
+type Subtask = {
+  id: number;
+  text: string;
+  completed: boolean;
+};
+
+type Item = {
+  id: number;
+  text: string;
+  completed: boolean;
+  subtasks?: Subtask[];
+};
 
 export const BucketList = () => {
-  const [items, setItems] = useState(initialItems);
+  const [items, setItems] = useState<Item[]>(data);
 
   const toggleItem = (id: number) => {
     setItems(prevItems => {
-      const updatedItems = prevItems.map(item =>
+      const updated = prevItems.map(item =>
         item.id === id ? { ...item, completed: !item.completed } : item
       );
-      // Sort: incomplete items first, then completed
-      return updatedItems.sort((a, b) => Number(a.completed) - Number(b.completed));
+      return updated.sort((a, b) => Number(a.completed) - Number(b.completed));
     });
   };
 
+  const toggleSubtask = (parentId: number, subtaskId: number) => {
+    setItems(prevItems =>
+      prevItems.map(item => {
+        if (item.id === parentId && item.subtasks) {
+          const updatedSubtasks = item.subtasks.map(sub =>
+            sub.id === subtaskId ? { ...sub, completed: !sub.completed } : sub
+          );
+          return { ...item, subtasks: updatedSubtasks };
+        }
+        return item;
+      })
+    );
+  };
+
   return (
-    <div style={{ padding: "16px" }}>
+    <div style={{ padding: "16px", maxWidth: "600px", margin: "0 auto" }}>
       <h2>My Bucket List</h2>
       <ul style={{ listStyle: "none", padding: 0 }}>
         {items.map(item => (
           <li
             key={item.id}
             style={{
-              display: "flex",
-              alignItems: "center",
-              marginBottom: "8px",
+              marginBottom: "12px",
+              borderBottom: "1px solid #ddd",
+              paddingBottom: "8px"
             }}
           >
-            <input
-              type="checkbox"
-              checked={item.completed}
-              onChange={() => toggleItem(item.id)}
-              style={{ marginRight: "8px" }}
-            />
-            <span
-              style={{
-                textDecoration: item.completed ? "line-through" : "none",
-                color: item.completed ? "#888" : "#000",
-              }}
-            >
-              {item.text}
-            </span>
+            <div style={{ display: "flex", alignItems: "center" }}>
+              <input
+                type="checkbox"
+                checked={item.completed}
+                onChange={() => toggleItem(item.id)}
+                style={{ marginRight: "8px" }}
+              />
+              <span
+                style={{
+                  textDecoration: item.completed ? "line-through" : "none",
+                  color: item.completed ? "#888" : "#000"
+                }}
+              >
+                {item.text}
+              </span>
+            </div>
+
+            {/* Render Subtasks if Present */}
+            {item.subtasks && (
+              <ul style={{ listStyle: "none", paddingLeft: "24px", marginTop: "8px" }}>
+                {item.subtasks.map(sub => (
+                  <li key={sub.id} style={{ marginBottom: "4px" }}>
+                    <input
+                      type="checkbox"
+                      checked={sub.completed}
+                      onChange={() => toggleSubtask(item.id, sub.id)}
+                      style={{ marginRight: "8px" }}
+                    />
+                    <span
+                      style={{
+                        textDecoration: sub.completed ? "line-through" : "none",
+                        color: sub.completed ? "#888" : "#000"
+                      }}
+                    >
+                      {sub.text}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            )}
           </li>
         ))}
       </ul>
     </div>
   );
 };
+
+export default BucketList;

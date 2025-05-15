@@ -3,102 +3,133 @@
     "id": 1,
     "name": "Toronto",
     "lat": 43.6534817,
-    "lng": -79.3839347
+    "lng": -79.3839347,
+    "image": "/images/Toronto.png"
   },
   {
     "id": 2,
     "name": "Ottawa",
     "lat": 45.4208777,
-    "lng": -75.6901106
+    "lng": -75.6901106,
+    "image": null
   },
   {
     "id": 3,
     "name": "Montreal",
     "lat": 45.5031824,
-    "lng": -73.5698065
+    "lng": -73.5698065,
+    "image": null
   },
   {
     "id": 4,
     "name": "Niagara Falls",
     "lat": 43.08436,
-    "lng": -79.0614686
+    "lng": -79.0614686,
+    "image": null
   },
   {
     "id": 5,
     "name": "New York",
     "lat": 40.7127281,
-    "lng": -74.0060152
+    "lng": -74.0060152,
+    "image": null
   },
   {
     "id": 6,
     "name": "Charlottetown",
     "lat": 46.234953,
-    "lng": -63.132935
+    "lng": -63.132935,
+    "image": null
   },
   {
     "id": 7,
     "name": "Halifax",
     "lat": 44.648618,
-    "lng": -63.5859487
+    "lng": -63.5859487,
+    "image": null
   },
   {
     "id": 8,
     "name": "San Francisco",
     "lat": 37.7792588,
-    "lng": -122.4193286
+    "lng": -122.4193286,
+    "image": null
   },
   {
     "id": 9,
     "name": "San Jose",
     "lat": 37.3361663,
-    "lng": -121.890591
+    "lng": -121.890591,
+    "image": null
   },
   {
     "id": 10,
     "name": "Paris",
     "lat": 48.8588897,
-    "lng": 2.320041
+    "lng": 2.320041,
+    "image": null
   },
   {
     "id": 11,
     "name": "Beijing",
     "lat": 40.190632,
-    "lng": 116.412144
+    "lng": 116.412144,
+    "image": null
   },
   {
     "id": 12,
     "name": "Shanghai",
     "lat": 31.2312707,
-    "lng": 121.4700152
+    "lng": 121.4700152,
+    "image": null
   },
   {
     "id": 13,
     "name": "Tokyo",
     "lat": 35.6768601,
-    "lng": 139.7638947
+    "lng": 139.7638947,
+    "image": null
   },
   {
     "id": 14,
-    "name": "Taipei City",
-    "lat": 25.0384808,
-    "lng": 121.562009
+    "name": "Osaka",
+    "lat": 34.6937569,
+    "lng": 135.5014539,
+    "image": "/images/Osaka.png"
   },
   {
     "id": 15,
-    "name": "Hartford",
-    "lat": 41.764582,
-    "lng": -72.6908547
+    "name": "Kyoto",
+    "lat": 35.0115754,
+    "lng": 135.7681441,
+    "image": null
   },
   {
     "id": 16,
-    "name": "Tucson",
-    "lat": 32.2228765,
-    "lng": -110.974847
+    "name": "Taipei City",
+    "lat": 25.0384808,
+    "lng": 121.562009,
+    "image": null
   },
   {
     "id": 17,
+    "name": "Hartford",
+    "lat": 41.764582,
+    "lng": -72.6908547,
+    "image": null
+  },
+  {
+    "id": 18,
+    "name": "Tucson",
+    "lat": 32.2228765,
+    "lng": -110.974847,
+    "image": null
+  },
+  {
+    "id": 19,
     "name": "Fort Lauderdale",
     "lat": 26.1223084,
-    "lng": -80.1433786
+    "lng": -80.1433786,
+    "image": null
   }
 ]

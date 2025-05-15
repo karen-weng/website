@@ -15,7 +15,7 @@ const ProjectCard = ({ title, description, techStack, links, image }: ProjectCar
       width: '95%',              // Wider card
       maxWidth: '900px',         // Longer layout
       boxShadow: '0 2px 8px rgba(0, 0, 0, 0.05)',
-      margin: '16px auto',       // Reduced vertical spacing
+      margin: '5px auto',       // Reduced vertical spacing
       backgroundColor: '#fff',
       transition: 'transform 0.3s ease, box-shadow 0.3s ease',
     }}
@@ -39,8 +39,8 @@ const ProjectCard = ({ title, description, techStack, links, image }: ProjectCar
           src={image} 
           alt={title} 
           style={{ 
-            width: '150px', 
-            height: '150px', 
+            width: '180px', 
+            height: '180px', 
             objectFit: 'cover', 
             borderRadius: '8px',
             flexShrink: 0 
@@ -55,7 +55,7 @@ const ProjectCard = ({ title, description, techStack, links, image }: ProjectCar
           {techStack.map(tech => (
             <span key={tech} style={{
               display: 'inline-block',
-              backgroundColor: '#f0f0f0',  // ✅ Neutral gray background
+              backgroundColor: '#f0f0f0',  //  Neutral gray background
               color: '#333',
               borderRadius: '12px',
               padding: '6px 12px',
@@ -78,7 +78,7 @@ const ProjectCard = ({ title, description, techStack, links, image }: ProjectCar
                 display: 'inline-block',
                 margin: '0 12px 12px 0',
                 padding: '8px 16px',
-                backgroundColor: '#333',     // ✅ Dark neutral buttons
+                backgroundColor: '#333',     //  Dark neutral buttons
                 color: '#fff',
                 borderRadius: '8px',
                 textDecoration: 'none',

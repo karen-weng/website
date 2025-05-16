@@ -22,114 +22,177 @@
   },
   {
     "id": 4,
+    "name": "Hamilton",
+    "lat": 43.2560802,
+    "lng": -79.8728583,
+    "image": "/images/Hamilton.png"
+  },
+  {
+    "id": 5,
+    "name": "Sandbanks Provincial Park",
+    "lat": 43.9063053,
+    "lng": -77.2503127,
+    "image": "/images/Sandbanks Provincial Park.png"
+  },
+  {
+    "id": 6,
+    "name": "Orillia",
+    "lat": 44.6066135,
+    "lng": -79.4169256,
+    "image": "/images/Orillia.png"
+  },
+  {
+    "id": 7,
+    "name": "Lake Muskoka",
+    "lat": 45.0107687,
+    "lng": -79.5992383,
+    "image": null
+  },
+  {
+    "id": 8,
     "name": "Niagara Falls",
     "lat": 43.08436,
     "lng": -79.0614686,
     "image": null
   },
   {
-    "id": 5,
+    "id": 9,
     "name": "New York",
     "lat": 40.7127281,
     "lng": -74.0060152,
     "image": null
   },
   {
-    "id": 6,
+    "id": 10,
     "name": "Charlottetown",
     "lat": 46.234953,
     "lng": -63.132935,
     "image": null
   },
   {
-    "id": 7,
+    "id": 11,
     "name": "Halifax",
     "lat": 44.648618,
     "lng": -63.5859487,
     "image": null
   },
   {
-    "id": 8,
+    "id": 12,
     "name": "San Francisco",
     "lat": 37.7792588,
     "lng": -122.4193286,
-    "image": null
+    "image": "/images/San Francisco.png"
   },
   {
-    "id": 9,
+    "id": 13,
+    "name": "Sausalito",
+    "lat": 37.8590272,
+    "lng": -122.485469,
+    "image": "/images/Sausalito.png"
+  },
+  {
+    "id": 14,
     "name": "San Jose",
     "lat": 37.3361663,
     "lng": -121.890591,
-    "image": null
+    "image": "/images/San Jose.png"
   },
   {
-    "id": 10,
+    "id": 15,
+    "name": "Santa Cruz County",
+    "lat": 37.050096,
+    "lng": -121.99059,
+    "image": "/images/Santa Cruz County.png"
+  },
+  {
+    "id": 16,
+    "name": "Fermont",
+    "lat": 44.5990718,
+    "lng": -72.5002608,
+    "image": "/images/Fermont.png"
+  },
+  {
+    "id": 17,
+    "name": "Oakland",
+    "lat": 37.8044557,
+    "lng": -122.271356,
+    "image": "/images/Oakland.png"
+  },
+  {
+    "id": 18,
     "name": "Paris",
     "lat": 48.8588897,
     "lng": 2.320041,
     "image": null
   },
   {
-    "id": 11,
+    "id": 19,
     "name": "Beijing",
     "lat": 40.190632,
     "lng": 116.412144,
     "image": null
   },
   {
-    "id": 12,
+    "id": 20,
     "name": "Shanghai",
     "lat": 31.2312707,
     "lng": 121.4700152,
     "image": null
   },
   {
-    "id": 13,
+    "id": 21,
     "name": "Tokyo",
     "lat": 35.6768601,
     "lng": 139.7638947,
     "image": null
   },
   {
-    "id": 14,
+    "id": 22,
     "name": "Osaka",
     "lat": 34.6937569,
     "lng": 135.5014539,
     "image": "/images/Osaka.png"
   },
   {
-    "id": 15,
+    "id": 23,
     "name": "Kyoto",
     "lat": 35.0115754,
     "lng": 135.7681441,
-    "image": null
+    "image": "/images/Kyoto.png"
   },
   {
-    "id": 16,
+    "id": 24,
     "name": "Taipei City",
     "lat": 25.0384808,
     "lng": 121.562009,
-    "image": null
+    "image": "/images/Taipei City.png"
   },
   {
-    "id": 17,
+    "id": 25,
     "name": "Hartford",
     "lat": 41.764582,
     "lng": -72.6908547,
     "image": null
   },
   {
-    "id": 18,
+    "id": 26,
     "name": "Tucson",
     "lat": 32.2228765,
     "lng": -110.974847,
-    "image": null
+    "image": "/images/Tucson.png"
   },
   {
-    "id": 19,
+    "id": 27,
     "name": "Fort Lauderdale",
     "lat": 26.1223084,
     "lng": -80.1433786,
     "image": null
+  },
+  {
+    "id": 28,
+    "name": "Albany",
+    "lat": 42.6511674,
+    "lng": -73.754968,
+    "image": "/images/Albany.png"
   }
 ]

@@ -66,12 +66,20 @@ const cities = [
   "Toronto",
   "Ottawa",
   "Montreal",
+  "Hamilton",
+  "Sandbanks Provincial Park",
+  "Orillia",
+  "Lake Muskoka",
   "Niagara Falls",
   "New York",
   "Charlottetown",
   "Halifax",
   "San Francisco",
+  "Sausalito",
   "San Jose",
+  "Santa Cruz County",
+  "Fermont",
+  "Oakland",
   "Paris",
   "Beijing",
   "Shanghai",
@@ -81,7 +89,9 @@ const cities = [
   "Taipei City",
   "Hartford",
   "Tucson",
-  "Fort Lauderdale"
+  "Fort Lauderdale", 
+  "Albany"
+  
 ];
 
 // Path to the images directory (adjust if different)

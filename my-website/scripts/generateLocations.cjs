@@ -78,7 +78,7 @@ const cities = [
   "Sausalito",
   "San Jose",
   "Santa Cruz County",
-  "Fermont",
+  "Fremont",
   "Oakland",
   "Paris",
   "Beijing",

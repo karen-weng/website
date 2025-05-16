@@ -106,10 +106,10 @@
   },
   {
     "id": 16,
-    "name": "Fermont",
-    "lat": 44.5990718,
-    "lng": -72.5002608,
-    "image": "/images/Fermont.png"
+    "name": "Fremont",
+    "lat": 37.5482697,
+    "lng": -121.988571,
+    "image": "/images/Fremont.png"
   },
   {
     "id": 17,
@@ -172,7 +172,7 @@
     "name": "Hartford",
     "lat": 41.764582,
     "lng": -72.6908547,
-    "image": null
+    "image": "/images/Hartford.png"
   },
   {
     "id": 26,

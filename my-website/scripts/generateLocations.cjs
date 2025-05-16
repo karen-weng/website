@@ -90,8 +90,8 @@ const cities = [
   "Hartford",
   "Tucson",
   "Fort Lauderdale", 
-  "Albany"
-  
+  "Albany",
+  "Nashville"
 ];
 
 // Path to the images directory (adjust if different)

@@ -194,5 +194,12 @@
     "lat": 42.6511674,
     "lng": -73.754968,
     "image": "/images/Albany.png"
+  },
+  {
+    "id": 29,
+    "name": "Nashville",
+    "lat": 36.1622767,
+    "lng": -86.7742984,
+    "image": null
   }
 ]

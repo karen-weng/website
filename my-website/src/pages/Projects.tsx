@@ -3,12 +3,25 @@ import ProjectCard from '../components/ProjectCard';
 import pomodoroImg from '../assets/pomodoro.png';
 import mixerImg from '../assets/295pcb.png';
 import makeuoftImg from '../assets/primepongpaddle.png';
-
-
+// things i want to add:
+// - tags for software/hardware have them colour coded (half half is both)
+// - links to github/devpost/website
+// - image of the project, have them chasole style so that you can swipe through them
+// - have a navbar for projects on the side that only have the title
+// - have a grid of projects images for the projects on the right, 
+// if you hover over them they give the the title and tech stack
+// - when you click on the project on the left you see more details and more pictures on the right
 
 const projects = [
   {
-    title: 'Radio Receiver',
+    title: 'Software Defined Radio Receiver',
+    description: '295 project',
+    techStack: ['Altium'],
+    links: [{ label: 'GitHub', url: 'https://github.com/WhosMadeer/ece295' }],
+    image: mixerImg 
+  },
+  {
+    title: 'Software Defined Radio Receiver',
     description: '295 project',
     techStack: ['Altium'],
     links: [{ label: 'GitHub', url: 'https://github.com/WhosMadeer/ece295' }],
@@ -24,15 +37,73 @@ const projects = [
     ],
     image: pomodoroImg
   },
-
   {
-    title: 'MakeUofT Hackathon Project',
+    title: 'Third Place: MakeUofT Hackathon Project',
     description: 'Built during XYZ Hackathon.',
     techStack: ['ESP32', 'MPU5060'],
     links: [
     { label: 'Devpost', url: 'https://devpost.com/software/primepong' },
       { label: 'GitHub', url: 'https://github.com/karen-weng/prime-pong' }
-      
+    ],
+    image: makeuoftImg
+  },
+  {
+    title: 'Third Place: MakeUofT Hackathon Project',
+    description: 'Built during XYZ Hackathon.',
+    techStack: ['ESP32', 'MPU5060'],
+    links: [
+    { label: 'Devpost', url: 'https://devpost.com/software/primepong' },
+      { label: 'GitHub', url: 'https://github.com/karen-weng/prime-pong' }
+    ],
+    image: makeuoftImg
+  },
+  {
+    title: 'Third Place: MakeUofT Hackathon Project',
+    description: 'Built during XYZ Hackathon.',
+    techStack: ['ESP32', 'MPU5060'],
+    links: [
+    { label: 'Devpost', url: 'https://devpost.com/software/primepong' },
+      { label: 'GitHub', url: 'https://github.com/karen-weng/prime-pong' }
+    ],
+    image: makeuoftImg
+  },
+  {
+    title: 'Third Place: MakeUofT Hackathon Project',
+    description: 'Built during XYZ Hackathon.',
+    techStack: ['ESP32', 'MPU5060'],
+    links: [
+    { label: 'Devpost', url: 'https://devpost.com/software/primepong' },
+      { label: 'GitHub', url: 'https://github.com/karen-weng/prime-pong' }
+    ],
+    image: makeuoftImg
+  },
+  {
+    title: 'Third Place: MakeUofT Hackathon Project',
+    description: 'Built during XYZ Hackathon.',
+    techStack: ['ESP32', 'MPU5060'],
+    links: [
+    { label: 'Devpost', url: 'https://devpost.com/software/primepong' },
+      { label: 'GitHub', url: 'https://github.com/karen-weng/prime-pong' }
+    ],
+    image: makeuoftImg
+  },
+  {
+    title: 'Third Place: MakeUofT Hackathon Project',
+    description: 'Built during XYZ Hackathon.',
+    techStack: ['ESP32', 'MPU5060'],
+    links: [
+    { label: 'Devpost', url: 'https://devpost.com/software/primepong' },
+      { label: 'GitHub', url: 'https://github.com/karen-weng/prime-pong' }
+    ],
+    image: makeuoftImg
+  },
+  {
+    title: 'Third Place: MakeUofT Hackathon Project',
+    description: 'Built during XYZ Hackathon.',
+    techStack: ['ESP32', 'MPU5060'],
+    links: [
+    { label: 'Devpost', url: 'https://devpost.com/software/primepong' },
+      { label: 'GitHub', url: 'https://github.com/karen-weng/prime-pong' }
     ],
     image: makeuoftImg
   },

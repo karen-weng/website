@@ -13,15 +13,15 @@ const projects = [
     title: 'No Name Hackathon',
     description: '295 project',
     techStack: ['Altium'],
-    links: [{ label: 'GitHub', url: 'https://github.com/WhosMadeer/ece295' }],
-    image: '/project-images/295pcb.png'
+    links: [{ label: 'GitHub', url: 'https://github.com/JakobStrozberg/no-name-shopping-list' }],
+    image: '/project-images/noname2.png'
   },
   {
     title: 'Third Place: Formula Null Hackathon',
     description: '295 project',
     techStack: ['Altium'],
     links: [{ label: 'GitHub', url: 'https://github.com/WhosMadeer/ece295' }],
-    image: '/project-images/295pcb.png'
+    image: '/project-images/toaster_third.png'
   },
   {
     title: 'Pomodoro Timer',
@@ -45,64 +45,24 @@ const projects = [
   },
   {
     title: 'Snake Game',
-    description: 'Built during XYZ Hackathon.',
+    description: 'DE1-SoC FPGA project using Verilog',
     techStack: ['ESP32', 'MPU5060'],
     links: [
-    { label: 'Devpost', url: 'https://devpost.com/software/primepong' },
-      { label: 'GitHub', url: 'https://github.com/karen-weng/prime-pong' }
+      { label: 'GitHub', url: 'https://github.com/karen-weng/Snake-Game' },
+      { label: 'Demo', url: 'https://youtu.be/aTkcDn0pBpA' }
     ],
-    image: '/project-images/primepongpaddle.png'
+    image: '/project-images/snake.png'
   },
   {
     title: 'Atlantic Hurricane Path Prediction',
     description: 'LSTM network, HURSAT dataset',
     techStack: ['ESP32', 'MPU5060'],
     links: [
-    { label: 'Devpost', url: 'https://devpost.com/software/primepong' },
-      { label: 'GitHub', url: 'https://github.com/karen-weng/prime-pong' }
+      { label: 'GitHub', url: 'https://github.com/sovdeeth/asp-360-group-56' },
+      { label: 'Demo', url: 'https://youtu.be/gwGoUBYasao' }
     ],
-    image: '/project-images/primepongpaddle.png'
-  },
-  {
-    title: 'InstaTeach - GenAI Genesis 2024 Hackathon ',
-    description: 'Built during XYZ Hackathon.',
-    techStack: ['ESP32', 'MPU5060'],
-    links: [
-    { label: 'Devpost', url: 'https://devpost.com/software/primepong' },
-      { label: 'GitHub', url: 'https://github.com/karen-weng/prime-pong' }
-    ],
-    image: '/project-images/primepongpaddle.png'
-  },
-  {
-    title: 'MakeUofT Hackathon Project',
-    description: 'Built during XYZ Hackathon.',
-    techStack: ['ESP32', 'MPU5060'],
-    links: [
-    { label: 'Devpost', url: 'https://devpost.com/software/primepong' },
-      { label: 'GitHub', url: 'https://github.com/karen-weng/prime-pong' }
-    ],
-    image: '/project-images/primepongpaddle.png'
-  },
-  {
-    title: 'Third Place: MakeUofT Hackathon Project',
-    description: 'Built during XYZ Hackathon.',
-    techStack: ['ESP32', 'MPU5060'],
-    links: [
-    { label: 'Devpost', url: 'https://devpost.com/software/primepong' },
-      { label: 'GitHub', url: 'https://github.com/karen-weng/prime-pong' }
-    ],
-    image: '/project-images/primepongpaddle.png'
-  },
-  {
-    title: 'Third Place: MakeUofT Hackathon Project',
-    description: 'Built during XYZ Hackathon.',
-    techStack: ['ESP32', 'MPU5060'],
-    links: [
-    { label: 'Devpost', url: 'https://devpost.com/software/primepong' },
-      { label: 'GitHub', url: 'https://github.com/karen-weng/prime-pong' }
-    ],
-    image: '/project-images/primepongpaddle.png'
-  },
+    image: '/project-images/Debby.png'
+  }
 
 ];
 

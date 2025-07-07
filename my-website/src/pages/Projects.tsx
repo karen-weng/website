@@ -27,7 +27,7 @@ const projects: Project[] = [
   {
     id: 'no-name',
     title: 'No Name Hackathon',
-    year: 2024,
+    year: 2025,
     previewImage: '/project-images/no-name/noname2.png',
     previewDescription: 'A comprehensive shopping list application developed during the No Name Hackathon. This project showcases modern web development practices and user-centric design.',
     category: ['software'],
@@ -75,8 +75,8 @@ const projects: Project[] = [
   },
   {
     id: 'formula-null',
-    title: 'Third Place: Formula Null Hackathon',
-    year: 2024,
+    title: '3rd Place: Formula Null Hackathon',
+    year: 2025,
     previewImage: '/project-images/formula-null/toaster_third.png',
     previewDescription: 'Hardware design project featuring advanced PCB design and embedded systems integration. Achieved third place in the competitive Formula Null Hackathon.',
     category: ['hardware'],
@@ -122,9 +122,53 @@ const projects: Project[] = [
     ]
   },
   {
+    id: 'ECE295',
+    title: 'Software Defined Radio Reciever',
+    year: 2025,
+    previewImage: '/project-images/ECE295/pcb.png',
+    previewDescription: 'A productivity timer built on FPGA.',
+    category: ['hardware', 'software'],
+    links: [
+      { label: 'GitHub', url: 'https://github.com/karen-weng/Pomodoro' },
+      { label: 'Demo', url: 'https://www.youtube.com/watch?v=0ngW_dFM08A' }
+    ],
+    contentBlocks: [
+      {
+        type: 'text',
+        content: 'An FPGA-based productivity timer implementing the Pomodoro Technique. Features custom RISC-V processor implementation and real-time task management.',
+        size: 'large'
+      },
+      {
+        type: 'divider',
+        style: 'dots'
+      },
+      {
+        type: 'image',
+        content: { 
+          src: '/project-images/ECE295/pcb.png', 
+          alt: 'Pomodoro Timer',
+          caption: 'Timer running on DE1-SoC board'
+        }
+      },
+      {
+        type: 'heading',
+        content: 'Technical Implementation'
+      },
+      {
+        type: 'text',
+        content: 'This project implements a complete embedded system with custom RISC-V processor core, timer peripherals, and real-time display management.'
+      },
+      {
+        type: 'quote',
+        content: 'The beauty of FPGA development is having complete control over every clock cycle.',
+        size: 'large'
+      }
+    ]
+  },
+  {
     id: 'pomodoro',
     title: 'Pomodoro Timer',
-    year: 2024,
+    year: 2025,
     previewImage: '/project-images/pomodoro/pomodoro.png',
     previewDescription: 'A productivity timer built on FPGA.',
     category: ['hardware', 'software'],
@@ -159,30 +203,6 @@ const projects: Project[] = [
         content: 'This project implements a complete embedded system with custom RISC-V processor core, timer peripherals, and real-time display management.'
       },
       {
-        type: 'code',
-        content: `// Main timer state machine in Verilog
-always @(posedge clk) begin
-    if (reset) begin
-        timer_state <= IDLE;
-        minutes <= 8'd25;  // Default 25 minutes
-        seconds <= 8'd0;
-    end else begin
-        case (timer_state)
-            IDLE: if (start_btn) timer_state <= RUNNING;
-            RUNNING: begin
-                if (seconds == 0) begin
-                    if (minutes == 0) timer_state <= BREAK;
-                    else begin
-                        minutes <= minutes - 1;
-                        seconds <= 8'd59;
-                    end
-                end else seconds <= seconds - 1;
-            end
-        endcase
-    end
-end`
-      },
-      {
         type: 'quote',
         content: 'The beauty of FPGA development is having complete control over every clock cycle.',
         size: 'large'
@@ -191,8 +211,8 @@ end`
   },
     {
     id: 'prime-pong',
-    title: 'Third Place: Prime Pong - MakeUofT Hackathon',
-    year: 2024,
+    title: '3rd Place: Prime Pong - MakeUofT Hackathon',
+    year: 2025,
     previewImage: '/project-images/prime-pong/primepongpaddle.png',
     previewDescription: 'Motion-controlled Pong game using ESP32.',
     category: ['hardware', 'software'],
@@ -229,7 +249,7 @@ end`
   {
     id: 'snake',
     title: 'Snake Game',
-    year: 2023,
+    year: 2024,
     previewImage: '/project-images/snake/snake.png',
     previewDescription: 'DE1-SoC FPGA project using Verilog',
     category: ['hardware'],
@@ -275,7 +295,7 @@ end`
   {
     id: 'APS360',
     title: 'Atlantic Hurricane Path Prediction',
-    year: 2023,
+    year: 2024,
     previewImage: '/project-images/APS360/Debby.png',
     previewDescription: 'LSTM network using HURSAT dataset',
     category: ['software'],

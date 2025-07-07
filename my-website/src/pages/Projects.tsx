@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import ProjectCard from '../components/ProjectCard';
 // things i want to add:
 // - tags for software/hardware have them colour coded (half half is both)
@@ -8,82 +9,443 @@ import ProjectCard from '../components/ProjectCard';
 // if you hover over them they give the the title and tech stack
 // - when you click on the project on the left you see more details and more pictures on the right
 
-const projects = [
+type ProjectCategory = 'hardware' | 'software';
+
+interface Project {
+  id: string;
+  title: string;
+  year: number;
+  description: string;
+  detailedDescription: string;
+  techStack: string[];
+  category: ProjectCategory[];
+  links: { label: string; url: string }[];
+  images: string[];
+  files?: { name: string; url: string }[];
+}
+
+const projects: Project[] = [
   {
+    id: 'no-name-hackathon',
     title: 'No Name Hackathon',
+    year: 2024,
     description: '295 project',
-    techStack: ['Altium'],
+    detailedDescription: 'A comprehensive shopping list application developed during the No Name Hackathon. This project showcases modern web development practices and user-centric design.',
+    techStack: ['React', 'Node.js', 'MongoDB'],
+    category: ['software'],
     links: [{ label: 'GitHub', url: 'https://github.com/JakobStrozberg/no-name-shopping-list' }],
-    image: '/project-images/noname2.png'
+    images: ['/project-images/noname2.png'],
+    files: [{ name: 'Project Report.pdf', url: '/project-files/noname-report.pdf' }]
   },
   {
+    id: 'formula-null',
     title: 'Third Place: Formula Null Hackathon',
+    year: 2024,
     description: '295 project',
-    techStack: ['Altium'],
+    detailedDescription: 'Hardware design project featuring advanced PCB design and embedded systems integration. Achieved third place in the competitive Formula Null Hackathon.',
+    techStack: ['Altium', 'C++', 'Embedded Systems'],
+    category: ['hardware'],
     links: [{ label: 'GitHub', url: 'https://github.com/WhosMadeer/ece295' }],
-    image: '/project-images/toaster_third.png'
+    images: ['/project-images/toaster_third.png'],
+    files: [{ name: 'PCB Design Files.zip', url: '/project-files/formula-null-pcb.zip' }]
   },
   {
+    id: 'pomodoro-timer',
     title: 'Pomodoro Timer',
+    year: 2024,
     description: 'A productivity timer built on FPGA.',
-    techStack: ['RISC-V', 'DE1-SoC', 'GDB', 'Powershell'],
+    detailedDescription: 'An FPGA-based productivity timer implementing the Pomodoro Technique. Features custom RISC-V processor implementation and real-time task management.',
+    techStack: ['RISC-V', 'DE1-SoC', 'GDB', 'PowerShell', 'Verilog'],
+    category: ['hardware', 'software'],
     links: [
       { label: 'GitHub', url: 'https://github.com/karen-weng/Pomodoro' },
       { label: 'Demo', url: 'https://www.youtube.com/watch?v=0ngW_dFM08A' }
     ],
-    image: '/project-images/pomodoro.png'
+    images: ['/project-images/pomodoro.png'],
+    files: [
+      { name: 'Verilog Source.zip', url: '/project-files/pomodoro-verilog.zip' },
+      { name: 'Demo Video.mp4', url: '/project-files/pomodoro-demo.mp4' }
+    ]
   },
   {
-    title: 'Third Place: Prime Pong - MakeUofT Hackathon Project',
-    description: 'Built during XYZ Hackathon.',
-    techStack: ['ESP32', 'MPU5060'],
+    id: 'prime-pong',
+    title: 'Third Place: Prime Pong - MakeUofT Hackathon',
+    year: 2024,
+    description: 'Motion-controlled Pong game using ESP32.',
+    detailedDescription: 'An innovative motion-controlled Pong game that won third place at MakeUofT. Uses ESP32 microcontroller and MPU6050 accelerometer for intuitive paddle control.',
+    techStack: ['ESP32', 'MPU6050', 'C++', 'Arduino IDE'],
+    category: ['hardware', 'software'],
     links: [
-    { label: 'Devpost', url: 'https://devpost.com/software/primepong' },
+      { label: 'Devpost', url: 'https://devpost.com/software/primepong' },
       { label: 'GitHub', url: 'https://github.com/karen-weng/prime-pong' }
     ],
-    image: '/project-images/primepongpaddle.png'
+    images: ['/project-images/primepongpaddle.png'],
+    files: [{ name: 'Source Code.zip', url: '/project-files/prime-pong-source.zip' }]
   },
   {
+    id: 'snake-game',
     title: 'Snake Game',
+    year: 2023,
     description: 'DE1-SoC FPGA project using Verilog',
-    techStack: ['ESP32', 'MPU5060'],
+    detailedDescription: 'Classic Snake game implementation on DE1-SoC FPGA board. Features VGA output, PS/2 keyboard input, and custom graphics pipeline written entirely in Verilog.',
+    techStack: ['Verilog', 'DE1-SoC', 'VGA', 'PS/2'],
+    category: ['hardware'],
     links: [
       { label: 'GitHub', url: 'https://github.com/karen-weng/Snake-Game' },
       { label: 'Demo', url: 'https://youtu.be/aTkcDn0pBpA' }
     ],
-    image: '/project-images/snake.png'
+    images: ['/project-images/snake.png'],
+    files: [{ name: 'Verilog HDL.zip', url: '/project-files/snake-verilog.zip' }]
   },
   {
+    id: 'hurricane-prediction',
     title: 'Atlantic Hurricane Path Prediction',
-    description: 'LSTM network, HURSAT dataset',
-    techStack: ['ESP32', 'MPU5060'],
+    year: 2023,
+    description: 'LSTM network using HURSAT dataset',
+    detailedDescription: 'Machine learning project for predicting Atlantic hurricane paths using LSTM neural networks. Trained on HURSAT satellite dataset with custom preprocessing pipeline.',
+    techStack: ['Python', 'TensorFlow', 'LSTM', 'HURSAT', 'Jupyter'],
+    category: ['software'],
     links: [
       { label: 'GitHub', url: 'https://github.com/sovdeeth/asp-360-group-56' },
       { label: 'Demo', url: 'https://youtu.be/gwGoUBYasao' }
     ],
-    image: '/project-images/Debby.png'
+    images: ['/project-images/Debby.png'],
+    files: [
+      { name: 'Research Paper.pdf', url: '/project-files/hurricane-paper.pdf' },
+      { name: 'Dataset Analysis.ipynb', url: '/project-files/hurricane-analysis.ipynb' }
+    ]
   }
-
 ];
 
-const Projects = () => (
-  <div style={{ textAlign: 'center', padding: '2rem' }}>
-    <h1>My Projects</h1>
-    <p>Here are some cool projects I've worked on!</p>
-    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1.5rem', marginTop: '2rem' }}>
-      {projects.map(project => (
-        <ProjectCard 
-            key={project.title} 
-            title={project.title} 
-            description={project.description} 
-            techStack={project.techStack} 
-            links={project.links} 
-            image={project.image}  
-        />
-      ))}
-    </div>
-  </div>
-);
+const Projects = () => {
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  const [showHardware, setShowHardware] = useState(true);
+  const [showSoftware, setShowSoftware] = useState(true);
 
+  const sortedProjects = [...projects].sort((a, b) => b.year - a.year);
+  
+  const filteredProjects = sortedProjects.filter(project => {
+    const hasHardware = project.category.includes('hardware');
+    const hasSoftware = project.category.includes('software');
+    
+    // Show project if ANY of its categories match enabled filters
+    const showForHardware = hasHardware && showHardware;
+    const showForSoftware = hasSoftware && showSoftware;
+    
+    return showForHardware || showForSoftware;
+  });
+
+  const getProjectUnderlineStyle = (project: Project) => {
+    const hasHardware = project.category.includes('hardware');
+    const hasSoftware = project.category.includes('software');
+    const underlineThickness = '4px';
+    
+    if (hasHardware && hasSoftware) {
+      return {
+        backgroundImage: `linear-gradient(to right, #ADD8E6 50%, #FFB6C1 50%)`,
+        backgroundPosition: `0 100%`,
+        backgroundRepeat: 'no-repeat',
+        backgroundSize: `100% ${underlineThickness}`
+      };
+    } else if (hasHardware) {
+      return { boxShadow: `inset 0 -${underlineThickness} 0 #ADD8E6` };
+    } else if (hasSoftware) {
+      return { boxShadow: `inset 0 -${underlineThickness} 0 #FFB6C1` };
+    }
+    return {};
+  };
+
+  return (
+    <div style={{ display: 'flex', height: '100vh', padding: '1rem' }}>
+      {/* Left Navbar */}
+      <div style={{ 
+        width: '300px', 
+        borderRight: '1px solid #e0e0e0', 
+        paddingRight: '1rem',
+        overflowY: 'auto'
+      }}>
+                 {/* Toggle Buttons */}
+         <div style={{ marginBottom: '1.5rem', display: 'flex', gap: '0.5rem' }}>
+           <button
+             onClick={() => setShowHardware(!showHardware)}
+             style={{
+               flex: 1,
+               padding: '0.25rem 0.25rem',
+               border: '1px solid #ADD8E6',
+               borderRadius: '0.25rem',
+               backgroundColor: showHardware ? '#ADD8E6' : '#f0f0f0',
+               color: showHardware ? 'white' : '#666',
+               cursor: 'pointer',
+               fontWeight: 'bold',
+               fontSize: '0.7rem',
+               transition: 'all 0.2s ease'
+             }}
+           >
+             Hardware
+           </button>
+           <button
+             onClick={() => setShowSoftware(!showSoftware)}
+             style={{
+               flex: 1,
+               padding: '0.25rem 0.25rem',
+               border: '1px solid #FFB6C1',
+               borderRadius: '0.25rem',
+               backgroundColor: showSoftware ? '#FFB6C1' : '#f0f0f0',
+               color: showSoftware ? 'white' : '#666',
+               cursor: 'pointer',
+               fontWeight: 'bold',
+               fontSize: '0.7rem',
+               transition: 'all 0.2s ease'
+             }}
+           >
+             Software
+           </button>
+         </div>
+
+        <h2 style={{ marginBottom: '1rem', color: '#333' }}>Projects</h2>
+        {filteredProjects.map(project => (
+          <div
+            key={project.id}
+            onClick={() => setSelectedProject(project)}
+            style={{
+              padding: '0.75rem',
+              marginBottom: '0.5rem',
+              borderRadius: '0.5rem',
+              cursor: 'pointer',
+              border: '1px solid #e0e0e0',
+              backgroundColor: 'white',
+              transition: 'all 0.2s ease',
+              ...getProjectUnderlineStyle(project)
+            }}
+          >
+            <div style={{ 
+              display: 'flex', 
+              justifyContent: 'space-between', 
+              alignItems: 'center',
+              width: '100%'
+            }}>
+              <div style={{ 
+                fontWeight: 'bold', 
+                fontSize: '0.9rem',
+                flex: 1,
+                marginRight: '1rem'
+              }}>
+                {project.title}
+              </div>
+              <div style={{ 
+                fontSize: '0.8rem', 
+                color: '#666',
+                fontWeight: 'normal'
+              }}>
+                {project.year}
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Right Content Area */}
+      <div style={{ flex: 1, paddingLeft: '2rem' }}>
+        {selectedProject ? (
+          // Detailed Project View
+          <div>
+            <button
+              onClick={() => setSelectedProject(null)}
+              style={{
+                marginBottom: '1rem',
+                padding: '0.5rem 1rem',
+                border: '1px solid #ccc',
+                borderRadius: '0.25rem',
+                backgroundColor: 'white',
+                cursor: 'pointer'
+              }}
+            >
+              ← Back to Grid
+            </button>
+            
+                         <div style={{
+               padding: '2rem',
+               borderRadius: '1rem',
+               backgroundColor: 'white',
+               border: '2px solid #e0e0e0'
+             }}>
+              <h1 style={{ marginBottom: '0.5rem' }}>{selectedProject.title}</h1>
+              <p style={{ fontSize: '1.1rem', color: '#666', marginBottom: '1rem' }}>
+                {selectedProject.year} • {selectedProject.category.join(' & ').charAt(0).toUpperCase() + selectedProject.category.join(' & ').slice(1)}
+              </p>
+              
+              <div style={{ marginBottom: '2rem' }}>
+                <h3>Description</h3>
+                <p>{selectedProject.detailedDescription}</p>
+              </div>
+
+              <div style={{ marginBottom: '2rem' }}>
+                <h3>Tech Stack</h3>
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
+                  {selectedProject.techStack.map(tech => (
+                    <span
+                      key={tech}
+                      style={{
+                        padding: '0.25rem 0.5rem',
+                        backgroundColor: 'rgba(255,255,255,0.8)',
+                        borderRadius: '0.25rem',
+                        fontSize: '0.8rem',
+                        border: '1px solid #ccc'
+                      }}
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              <div style={{ marginBottom: '2rem' }}>
+                <h3>Images</h3>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem' }}>
+                  {selectedProject.images.map((image, index) => (
+                    <img
+                      key={index}
+                      src={image}
+                      alt={`${selectedProject.title} ${index + 1}`}
+                      style={{
+                        width: '100%',
+                        height: '150px',
+                        objectFit: 'cover',
+                        borderRadius: '0.5rem',
+                        border: '1px solid #ccc'
+                      }}
+                    />
+                  ))}
+                </div>
+              </div>
+
+              <div style={{ marginBottom: '2rem' }}>
+                <h3>Links</h3>
+                <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+                  {selectedProject.links.map(link => (
+                    <a
+                      key={link.label}
+                      href={link.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={{
+                        padding: '0.5rem 1rem',
+                        backgroundColor: '#333',
+                        color: 'white',
+                        textDecoration: 'none',
+                        borderRadius: '0.25rem',
+                        fontSize: '0.9rem'
+                      }}
+                    >
+                      {link.label}
+                    </a>
+                  ))}
+                </div>
+              </div>
+
+              {selectedProject.files && selectedProject.files.length > 0 && (
+                <div>
+                  <h3>Downloads</h3>
+                  <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+                    {selectedProject.files.map(file => (
+                      <a
+                        key={file.name}
+                        href={file.url}
+                        download
+                        style={{
+                          padding: '0.5rem 1rem',
+                          backgroundColor: '#007bff',
+                          color: 'white',
+                          textDecoration: 'none',
+                          borderRadius: '0.25rem',
+                          fontSize: '0.9rem'
+                        }}
+                      >
+                        📁 {file.name}
+                      </a>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+        ) : (
+          // Grid View
+          <div>
+            <h1 style={{ marginBottom: '2rem', textAlign: 'center' }}>My Projects</h1>
+            <div style={{ 
+              display: 'grid', 
+              gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', 
+              gap: '1.5rem' 
+            }}>
+              {filteredProjects.map(project => (
+                <div
+                  key={project.id}
+                  onClick={() => setSelectedProject(project)}
+                  style={{
+                    position: 'relative',
+                    cursor: 'pointer',
+                    borderRadius: '1rem',
+                    overflow: 'hidden',
+                    transition: 'transform 0.2s ease',
+                    ...getProjectUnderlineStyle(project)
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.transform = 'scale(1.05)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.transform = 'scale(1)';
+                  }}
+                >
+                  <div style={{ position: 'relative' }}>
+                    <img
+                      src={project.images[0]}
+                      alt={project.title}
+                      style={{
+                        width: '100%',
+                        height: '200px',
+                        objectFit: 'cover',
+                        transition: 'filter 0.3s ease',
+                        borderRadius: '1rem'
+                      }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.filter = 'brightness(0.7)';
+                        const overlay = e.currentTarget.nextElementSibling as HTMLElement;
+                        if (overlay) overlay.style.opacity = '1';
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.filter = 'brightness(1)';
+                        const overlay = e.currentTarget.nextElementSibling as HTMLElement;
+                        if (overlay) overlay.style.opacity = '0';
+                      }}
+                    />
+                    <div
+                      style={{
+                        position: 'absolute',
+                        top: '50%',
+                        left: '50%',
+                        transform: 'translate(-50%, -50%)',
+                        color: 'white',
+                        fontSize: '1.2rem',
+                        fontWeight: 'bold',
+                        textAlign: 'center',
+                        opacity: '0',
+                        transition: 'opacity 0.3s ease',
+                        textShadow: '2px 2px 4px rgba(0,0,0,0.8)',
+                        pointerEvents: 'none'
+                      }}
+                    >
+                      {project.title}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
 
 export default Projects;

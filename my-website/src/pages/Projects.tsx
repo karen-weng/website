@@ -14,14 +14,14 @@ import makeuoftImg from '../assets/primepongpaddle.png';
 
 const projects = [
   {
-    title: 'Software Defined Radio Receiver',
+    title: 'No Name Hackathon',
     description: '295 project',
     techStack: ['Altium'],
     links: [{ label: 'GitHub', url: 'https://github.com/WhosMadeer/ece295' }],
     image: mixerImg 
   },
   {
-    title: 'Software Defined Radio Receiver',
+    title: 'Third Place:Formula Null Hackathon',
     description: '295 project',
     techStack: ['Altium'],
     links: [{ label: 'GitHub', url: 'https://github.com/WhosMadeer/ece295' }],
@@ -38,7 +38,7 @@ const projects = [
     image: pomodoroImg
   },
   {
-    title: 'Third Place: MakeUofT Hackathon Project',
+    title: 'Third Place: Prime Pong - MakeUofT Hackathon Project',
     description: 'Built during XYZ Hackathon.',
     techStack: ['ESP32', 'MPU5060'],
     links: [
@@ -48,7 +48,7 @@ const projects = [
     image: makeuoftImg
   },
   {
-    title: 'Third Place: MakeUofT Hackathon Project',
+    title: 'Snake Game',
     description: 'Built during XYZ Hackathon.',
     techStack: ['ESP32', 'MPU5060'],
     links: [
@@ -58,7 +58,17 @@ const projects = [
     image: makeuoftImg
   },
   {
-    title: 'Third Place: MakeUofT Hackathon Project',
+    title: 'Atlantic Hurricane Path Prediction',
+    description: 'LSTM network, HURSAT dataset',
+    techStack: ['ESP32', 'MPU5060'],
+    links: [
+    { label: 'Devpost', url: 'https://devpost.com/software/primepong' },
+      { label: 'GitHub', url: 'https://github.com/karen-weng/prime-pong' }
+    ],
+    image: makeuoftImg
+  },
+  {
+    title: 'InstaTeach - GenAI Genesis 2024 Hackathon ',
     description: 'Built during XYZ Hackathon.',
     techStack: ['ESP32', 'MPU5060'],
     links: [
@@ -68,17 +78,7 @@ const projects = [
     image: makeuoftImg
   },
   {
-    title: 'Third Place: MakeUofT Hackathon Project',
-    description: 'Built during XYZ Hackathon.',
-    techStack: ['ESP32', 'MPU5060'],
-    links: [
-    { label: 'Devpost', url: 'https://devpost.com/software/primepong' },
-      { label: 'GitHub', url: 'https://github.com/karen-weng/prime-pong' }
-    ],
-    image: makeuoftImg
-  },
-  {
-    title: 'Third Place: MakeUofT Hackathon Project',
+    title: 'MakeUofT Hackathon Project',
     description: 'Built during XYZ Hackathon.',
     techStack: ['ESP32', 'MPU5060'],
     links: [

@@ -25,10 +25,10 @@ import FlexibleProjectDetailView from '../components/FlexibleProjectDetailView';
 
 const projects: Project[] = [
   {
-    id: 'no-name-hackathon',
+    id: 'no-name',
     title: 'No Name Hackathon',
     year: 2024,
-    previewImage: '/project-images/noname2.png',
+    previewImage: '/project-images/no-name/noname2.png',
     previewDescription: 'A comprehensive shopping list application developed during the No Name Hackathon. This project showcases modern web development practices and user-centric design.',
     category: ['software'],
     links: [{ label: 'GitHub', url: 'https://github.com/JakobStrozberg/no-name-shopping-list' }],
@@ -40,25 +40,25 @@ const projects: Project[] = [
       },
       {
         type: 'image',
-        src: '/project-images/noname1.png',
+        src: '/project-images/no-name/noname1.png',
         alt: 'App Screenshot',
         caption: 'Main shopping list interface'
       },
       {
         type: 'image',
-        src: '/project-images/noname2.png',
+        src: '/project-images/no-name/noname2.png',
         alt: 'App Screenshot',
         caption: 'Main shopping list interface'
       },
       {
         type: 'image',
-        src: '/project-images/noname3.png',
+        src: '/project-images/no-name/noname3.png',
         alt: 'App Screenshot',
         caption: 'Main shopping list interface'
       },
       {
         type: 'image',
-        src: '/project-images/noname4.png',
+        src: '/project-images/no-name/noname4.png',
         alt: 'App Screenshot',
         caption: 'Main shopping list interface'
       },
@@ -77,7 +77,7 @@ const projects: Project[] = [
     id: 'formula-null',
     title: 'Third Place: Formula Null Hackathon',
     year: 2024,
-    previewImage: '/project-images/toaster_third.png',
+    previewImage: '/project-images/formula-null/toaster_third.png',
     previewDescription: 'Hardware design project featuring advanced PCB design and embedded systems integration. Achieved third place in the competitive Formula Null Hackathon.',
     category: ['hardware'],
     links: [{ label: 'GitHub', url: 'https://github.com/WhosMadeer/ece295' }],
@@ -90,7 +90,7 @@ const projects: Project[] = [
       {
         type: 'image',
         content: { 
-          src: '/project-images/toaster_third.png', 
+          src: '/project-images/formula-null/toaster_third.png', 
           alt: 'Final PCB Design',
           caption: 'Final PCB design with component placement'
         },
@@ -99,7 +99,16 @@ const projects: Project[] = [
       {
         type: 'image',
         content: { 
-          src: '/project-images/295pcb.png', 
+          src: '/project-images/formula-null/toaster_lineup.webp', 
+          alt: 'PCB Layout',
+          caption: 'Detailed PCB routing and traces'
+        },
+        align: 'center'
+      },
+      {
+        type: 'image',
+        content: { 
+          src: '/project-images/formula-null/trashmech_team.webp', 
           alt: 'PCB Layout',
           caption: 'Detailed PCB routing and traces'
         },
@@ -113,10 +122,10 @@ const projects: Project[] = [
     ]
   },
   {
-    id: 'pomodoro-timer',
+    id: 'pomodoro',
     title: 'Pomodoro Timer',
     year: 2024,
-    previewImage: '/project-images/pomodoro.png',
+    previewImage: '/project-images/pomodoro/pomodoro.png',
     previewDescription: 'A productivity timer built on FPGA.',
     category: ['hardware', 'software'],
     links: [
@@ -136,7 +145,7 @@ const projects: Project[] = [
       {
         type: 'image',
         content: { 
-          src: '/project-images/pomodoro.png', 
+          src: '/project-images/pomodoro/pomodoro.png', 
           alt: 'Pomodoro Timer',
           caption: 'Timer running on DE1-SoC board'
         }
@@ -184,7 +193,7 @@ end`
     id: 'prime-pong',
     title: 'Third Place: Prime Pong - MakeUofT Hackathon',
     year: 2024,
-    previewImage: '/project-images/primepongpaddle.png',
+    previewImage: '/project-images/prime-pong/primepongpaddle.png',
     previewDescription: 'Motion-controlled Pong game using ESP32.',
     category: ['hardware', 'software'],
     links: [
@@ -200,7 +209,7 @@ end`
       {
         type: 'image',
         content: { 
-          src: '/project-images/primepongpaddle.png', 
+          src: '/project-images/prime-pong/primepongpaddle.png', 
           alt: 'Motion-controlled paddle',
           caption: 'Custom paddle with embedded ESP32 and accelerometer'
         },
@@ -218,10 +227,10 @@ end`
     ]
   },
   {
-    id: 'snake-game',
+    id: 'snake',
     title: 'Snake Game',
     year: 2023,
-    previewImage: '/project-images/snake.png',
+    previewImage: '/project-images/snake/snake.png',
     previewDescription: 'DE1-SoC FPGA project using Verilog',
     category: ['hardware'],
     links: [
@@ -237,7 +246,16 @@ end`
       {
         type: 'image',
         content: { 
-          src: '/project-images/snake.png', 
+          src: '/project-images/snake/snake.png', 
+          alt: 'Snake Game Gameplay',
+          caption: 'Snake game running on VGA display'
+        },
+        align: 'center'
+      },
+      {
+        type: 'image',
+        content: { 
+          src: '/project-images/snake/snake_block.png', 
           alt: 'Snake Game Gameplay',
           caption: 'Snake game running on VGA display'
         },
@@ -255,10 +273,10 @@ end`
     ]
   },
   {
-    id: 'hurricane-prediction',
+    id: 'APS360',
     title: 'Atlantic Hurricane Path Prediction',
     year: 2023,
-    previewImage: '/project-images/Debby.png',
+    previewImage: '/project-images/APS360/Debby.png',
     previewDescription: 'LSTM network using HURSAT dataset',
     category: ['software'],
     links: [
@@ -274,7 +292,16 @@ end`
       {
         type: 'image',
         content: { 
-          src: '/project-images/Debby.png', 
+          src: '/project-images/APS360/Debby.png', 
+          alt: 'Hurricane Debby Path Prediction',
+          caption: 'Predicted vs actual path for Hurricane Debby'
+        },
+        align: 'center'
+      },
+      {
+        type: 'image',
+        content: { 
+          src: '/project-images/APS360/Ernesto.png', 
           alt: 'Hurricane Debby Path Prediction',
           caption: 'Predicted vs actual path for Hurricane Debby'
         },

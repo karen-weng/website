@@ -1,8 +1,4 @@
 import ProjectCard from '../components/ProjectCard';
-// import reactImg from '../assets/react.svg';
-import pomodoroImg from '../assets/pomodoro.png';
-import mixerImg from '../assets/295pcb.png';
-import makeuoftImg from '../assets/primepongpaddle.png';
 // things i want to add:
 // - tags for software/hardware have them colour coded (half half is both)
 // - links to github/devpost/website
@@ -18,14 +14,14 @@ const projects = [
     description: '295 project',
     techStack: ['Altium'],
     links: [{ label: 'GitHub', url: 'https://github.com/WhosMadeer/ece295' }],
-    image: mixerImg 
+    image: '/project-images/295pcb.png'
   },
   {
-    title: 'Third Place:Formula Null Hackathon',
+    title: 'Third Place: Formula Null Hackathon',
     description: '295 project',
     techStack: ['Altium'],
     links: [{ label: 'GitHub', url: 'https://github.com/WhosMadeer/ece295' }],
-    image: mixerImg 
+    image: '/project-images/295pcb.png'
   },
   {
     title: 'Pomodoro Timer',
@@ -35,7 +31,7 @@ const projects = [
       { label: 'GitHub', url: 'https://github.com/karen-weng/Pomodoro' },
       { label: 'Demo', url: 'https://www.youtube.com/watch?v=0ngW_dFM08A' }
     ],
-    image: pomodoroImg
+    image: '/project-images/pomodoro.png'
   },
   {
     title: 'Third Place: Prime Pong - MakeUofT Hackathon Project',
@@ -45,7 +41,7 @@ const projects = [
     { label: 'Devpost', url: 'https://devpost.com/software/primepong' },
       { label: 'GitHub', url: 'https://github.com/karen-weng/prime-pong' }
     ],
-    image: makeuoftImg
+    image: '/project-images/primepongpaddle.png'
   },
   {
     title: 'Snake Game',
@@ -55,7 +51,7 @@ const projects = [
     { label: 'Devpost', url: 'https://devpost.com/software/primepong' },
       { label: 'GitHub', url: 'https://github.com/karen-weng/prime-pong' }
     ],
-    image: makeuoftImg
+    image: '/project-images/primepongpaddle.png'
   },
   {
     title: 'Atlantic Hurricane Path Prediction',
@@ -65,7 +61,7 @@ const projects = [
     { label: 'Devpost', url: 'https://devpost.com/software/primepong' },
       { label: 'GitHub', url: 'https://github.com/karen-weng/prime-pong' }
     ],
-    image: makeuoftImg
+    image: '/project-images/primepongpaddle.png'
   },
   {
     title: 'InstaTeach - GenAI Genesis 2024 Hackathon ',
@@ -75,7 +71,7 @@ const projects = [
     { label: 'Devpost', url: 'https://devpost.com/software/primepong' },
       { label: 'GitHub', url: 'https://github.com/karen-weng/prime-pong' }
     ],
-    image: makeuoftImg
+    image: '/project-images/primepongpaddle.png'
   },
   {
     title: 'MakeUofT Hackathon Project',
@@ -85,7 +81,7 @@ const projects = [
     { label: 'Devpost', url: 'https://devpost.com/software/primepong' },
       { label: 'GitHub', url: 'https://github.com/karen-weng/prime-pong' }
     ],
-    image: makeuoftImg
+    image: '/project-images/primepongpaddle.png'
   },
   {
     title: 'Third Place: MakeUofT Hackathon Project',
@@ -95,7 +91,7 @@ const projects = [
     { label: 'Devpost', url: 'https://devpost.com/software/primepong' },
       { label: 'GitHub', url: 'https://github.com/karen-weng/prime-pong' }
     ],
-    image: makeuoftImg
+    image: '/project-images/primepongpaddle.png'
   },
   {
     title: 'Third Place: MakeUofT Hackathon Project',
@@ -105,7 +101,7 @@ const projects = [
     { label: 'Devpost', url: 'https://devpost.com/software/primepong' },
       { label: 'GitHub', url: 'https://github.com/karen-weng/prime-pong' }
     ],
-    image: makeuoftImg
+    image: '/project-images/primepongpaddle.png'
   },
 
 ];

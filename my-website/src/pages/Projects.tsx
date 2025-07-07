@@ -1,28 +1,9 @@
 import { useState } from 'react';
-import ProjectCard from '../components/ProjectCard';
-// things i want to add:
-// - tags for software/hardware have them colour coded (half half is both)
-// - links to github/devpost/website
-// - image of the project, have them chasole style so that you can swipe through them
-// - have a navbar for projects on the side that only have the title
-// - have a grid of projects images for the projects on the right, 
-// if you hover over them they give the the title and tech stack
-// - when you click on the project on the left you see more details and more pictures on the right
-
-type ProjectCategory = 'hardware' | 'software';
-
-interface Project {
-  id: string;
-  title: string;
-  year: number;
-  description: string;
-  detailedDescription: string;
-  techStack: string[];
-  category: ProjectCategory[];
-  links: { label: string; url: string }[];
-  images: string[];
-  files?: { name: string; url: string }[];
-}
+import type { Project } from '../types/project';
+import ProjectFilters from '../components/ProjectFilters';
+import ProjectNavItem from '../components/ProjectNavItem';
+import ProjectGridItem from '../components/ProjectGridItem';
+import ProjectDetailView from '../components/ProjectDetailView';
 
 const projects: Project[] = [
   {
@@ -118,129 +99,51 @@ const projects: Project[] = [
 ];
 
 const Projects = () => {
+  // State management
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [showHardware, setShowHardware] = useState(true);
   const [showSoftware, setShowSoftware] = useState(true);
 
+  // Data processing
   const sortedProjects = [...projects].sort((a, b) => b.year - a.year);
   
+  // Filtering logic: Show project if ANY of its categories match enabled filters
   const filteredProjects = sortedProjects.filter(project => {
     const hasHardware = project.category.includes('hardware');
     const hasSoftware = project.category.includes('software');
     
-    // Show project if ANY of its categories match enabled filters
     const showForHardware = hasHardware && showHardware;
     const showForSoftware = hasSoftware && showSoftware;
     
     return showForHardware || showForSoftware;
   });
 
-  const getProjectUnderlineStyle = (project: Project) => {
-    const hasHardware = project.category.includes('hardware');
-    const hasSoftware = project.category.includes('software');
-    const underlineThickness = '4px';
-    
-    if (hasHardware && hasSoftware) {
-      return {
-        backgroundImage: `linear-gradient(to right, #ADD8E6 50%, #FFB6C1 50%)`,
-        backgroundPosition: `0 100%`,
-        backgroundRepeat: 'no-repeat',
-        backgroundSize: `100% ${underlineThickness}`
-      };
-    } else if (hasHardware) {
-      return { boxShadow: `inset 0 -${underlineThickness} 0 #ADD8E6` };
-    } else if (hasSoftware) {
-      return { boxShadow: `inset 0 -${underlineThickness} 0 #FFB6C1` };
-    }
-    return {};
-  };
-
   return (
     <div style={{ display: 'flex', height: '100vh', padding: '1rem' }}>
-      {/* Left Navbar */}
+      {/* Left Sidebar */}
       <div style={{ 
         width: '300px', 
         borderRight: '1px solid #e0e0e0', 
         paddingRight: '1rem',
         overflowY: 'auto'
       }}>
-                 {/* Toggle Buttons */}
-         <div style={{ marginBottom: '1.5rem', display: 'flex', gap: '0.5rem' }}>
-           <button
-             onClick={() => setShowHardware(!showHardware)}
-             style={{
-               flex: 1,
-               padding: '0.25rem 0.25rem',
-               border: '1px solid #ADD8E6',
-               borderRadius: '0.25rem',
-               backgroundColor: showHardware ? '#ADD8E6' : '#f0f0f0',
-               color: showHardware ? 'white' : '#666',
-               cursor: 'pointer',
-               fontWeight: 'bold',
-               fontSize: '0.7rem',
-               transition: 'all 0.2s ease'
-             }}
-           >
-             Hardware
-           </button>
-           <button
-             onClick={() => setShowSoftware(!showSoftware)}
-             style={{
-               flex: 1,
-               padding: '0.25rem 0.25rem',
-               border: '1px solid #FFB6C1',
-               borderRadius: '0.25rem',
-               backgroundColor: showSoftware ? '#FFB6C1' : '#f0f0f0',
-               color: showSoftware ? 'white' : '#666',
-               cursor: 'pointer',
-               fontWeight: 'bold',
-               fontSize: '0.7rem',
-               transition: 'all 0.2s ease'
-             }}
-           >
-             Software
-           </button>
-         </div>
+        {/* Filter Controls */}
+        <ProjectFilters
+          showHardware={showHardware}
+          showSoftware={showSoftware}
+          onToggleHardware={() => setShowHardware(!showHardware)}
+          onToggleSoftware={() => setShowSoftware(!showSoftware)}
+        />
 
+        {/* Projects Navigation List */}
         <h2 style={{ marginBottom: '1rem', color: '#333' }}>Projects</h2>
         {filteredProjects.map(project => (
-          <div
+          <ProjectNavItem
             key={project.id}
+            project={project}
+            isSelected={selectedProject?.id === project.id}
             onClick={() => setSelectedProject(project)}
-            style={{
-              padding: '0.75rem',
-              marginBottom: '0.5rem',
-              borderRadius: '0.5rem',
-              cursor: 'pointer',
-              border: '1px solid #e0e0e0',
-              backgroundColor: 'white',
-              transition: 'all 0.2s ease',
-              ...getProjectUnderlineStyle(project)
-            }}
-          >
-            <div style={{ 
-              display: 'flex', 
-              justifyContent: 'space-between', 
-              alignItems: 'center',
-              width: '100%'
-            }}>
-              <div style={{ 
-                fontWeight: 'bold', 
-                fontSize: '0.9rem',
-                flex: 1,
-                marginRight: '1rem'
-              }}>
-                {project.title}
-              </div>
-              <div style={{ 
-                fontSize: '0.8rem', 
-                color: '#666',
-                fontWeight: 'normal'
-              }}>
-                {project.year}
-              </div>
-            </div>
-          </div>
+          />
         ))}
       </div>
 
@@ -248,127 +151,10 @@ const Projects = () => {
       <div style={{ flex: 1, paddingLeft: '2rem' }}>
         {selectedProject ? (
           // Detailed Project View
-          <div>
-            <button
-              onClick={() => setSelectedProject(null)}
-              style={{
-                marginBottom: '1rem',
-                padding: '0.5rem 1rem',
-                border: '1px solid #ccc',
-                borderRadius: '0.25rem',
-                backgroundColor: 'white',
-                cursor: 'pointer'
-              }}
-            >
-              ← Back to Grid
-            </button>
-            
-                         <div style={{
-               padding: '2rem',
-               borderRadius: '1rem',
-               backgroundColor: 'white',
-               border: '2px solid #e0e0e0'
-             }}>
-              <h1 style={{ marginBottom: '0.5rem' }}>{selectedProject.title}</h1>
-              <p style={{ fontSize: '1.1rem', color: '#666', marginBottom: '1rem' }}>
-                {selectedProject.year} • {selectedProject.category.join(' & ').charAt(0).toUpperCase() + selectedProject.category.join(' & ').slice(1)}
-              </p>
-              
-              <div style={{ marginBottom: '2rem' }}>
-                <h3>Description</h3>
-                <p>{selectedProject.detailedDescription}</p>
-              </div>
-
-              <div style={{ marginBottom: '2rem' }}>
-                <h3>Tech Stack</h3>
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
-                  {selectedProject.techStack.map(tech => (
-                    <span
-                      key={tech}
-                      style={{
-                        padding: '0.25rem 0.5rem',
-                        backgroundColor: 'rgba(255,255,255,0.8)',
-                        borderRadius: '0.25rem',
-                        fontSize: '0.8rem',
-                        border: '1px solid #ccc'
-                      }}
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-              </div>
-
-              <div style={{ marginBottom: '2rem' }}>
-                <h3>Images</h3>
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem' }}>
-                  {selectedProject.images.map((image, index) => (
-                    <img
-                      key={index}
-                      src={image}
-                      alt={`${selectedProject.title} ${index + 1}`}
-                      style={{
-                        width: '100%',
-                        height: '150px',
-                        objectFit: 'cover',
-                        borderRadius: '0.5rem',
-                        border: '1px solid #ccc'
-                      }}
-                    />
-                  ))}
-                </div>
-              </div>
-
-              <div style={{ marginBottom: '2rem' }}>
-                <h3>Links</h3>
-                <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
-                  {selectedProject.links.map(link => (
-                    <a
-                      key={link.label}
-                      href={link.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      style={{
-                        padding: '0.5rem 1rem',
-                        backgroundColor: '#333',
-                        color: 'white',
-                        textDecoration: 'none',
-                        borderRadius: '0.25rem',
-                        fontSize: '0.9rem'
-                      }}
-                    >
-                      {link.label}
-                    </a>
-                  ))}
-                </div>
-              </div>
-
-              {selectedProject.files && selectedProject.files.length > 0 && (
-                <div>
-                  <h3>Downloads</h3>
-                  <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
-                    {selectedProject.files.map(file => (
-                      <a
-                        key={file.name}
-                        href={file.url}
-                        download
-                        style={{
-                          padding: '0.5rem 1rem',
-                          backgroundColor: '#007bff',
-                          color: 'white',
-                          textDecoration: 'none',
-                          borderRadius: '0.25rem',
-                          fontSize: '0.9rem'
-                        }}
-                      >
-                        📁 {file.name}
-                      </a>
-                    ))}
-                  </div>
-                </div>
-              )}
-            </div>
-          </div>
+          <ProjectDetailView
+            project={selectedProject}
+            onBack={() => setSelectedProject(null)}
+          />
         ) : (
           // Grid View
           <div>
@@ -379,66 +165,11 @@ const Projects = () => {
               gap: '1.5rem' 
             }}>
               {filteredProjects.map(project => (
-                <div
+                <ProjectGridItem
                   key={project.id}
+                  project={project}
                   onClick={() => setSelectedProject(project)}
-                  style={{
-                    position: 'relative',
-                    cursor: 'pointer',
-                    borderRadius: '1rem',
-                    overflow: 'hidden',
-                    transition: 'transform 0.2s ease',
-                    ...getProjectUnderlineStyle(project)
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.transform = 'scale(1.05)';
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.transform = 'scale(1)';
-                  }}
-                >
-                  <div style={{ position: 'relative' }}>
-                    <img
-                      src={project.images[0]}
-                      alt={project.title}
-                      style={{
-                        width: '100%',
-                        height: '200px',
-                        objectFit: 'cover',
-                        transition: 'filter 0.3s ease',
-                        borderRadius: '1rem'
-                      }}
-                      onMouseEnter={(e) => {
-                        e.currentTarget.style.filter = 'brightness(0.7)';
-                        const overlay = e.currentTarget.nextElementSibling as HTMLElement;
-                        if (overlay) overlay.style.opacity = '1';
-                      }}
-                      onMouseLeave={(e) => {
-                        e.currentTarget.style.filter = 'brightness(1)';
-                        const overlay = e.currentTarget.nextElementSibling as HTMLElement;
-                        if (overlay) overlay.style.opacity = '0';
-                      }}
-                    />
-                    <div
-                      style={{
-                        position: 'absolute',
-                        top: '50%',
-                        left: '50%',
-                        transform: 'translate(-50%, -50%)',
-                        color: 'white',
-                        fontSize: '1.2rem',
-                        fontWeight: 'bold',
-                        textAlign: 'center',
-                        opacity: '0',
-                        transition: 'opacity 0.3s ease',
-                        textShadow: '2px 2px 4px rgba(0,0,0,0.8)',
-                        pointerEvents: 'none'
-                      }}
-                    >
-                      {project.title}
-                    </div>
-                  </div>
-                </div>
+                />
               ))}
             </div>
           </div>

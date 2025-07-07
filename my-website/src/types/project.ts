@@ -7,6 +7,18 @@
 
 export type ProjectCategory = 'hardware' | 'software';
 
+// Content Block System - Clean Component-Based Architecture
+export interface ContentBlock {
+  type: 'text' | 'image' | 'heading' | 'code' | 'quote' | 'divider';
+  content?: any;       // For text, heading, code, quote content
+  src?: string;        // For images
+  alt?: string;        // For images
+  caption?: string;    // For images
+  size?: 'small' | 'medium' | 'large';
+  align?: 'left' | 'center' | 'right';
+  style?: 'line' | 'space' | 'dots'; // For dividers
+}
+
 export interface Project {
   id: string;
   title: string;
@@ -16,6 +28,7 @@ export interface Project {
   techStack: string[];
   category: ProjectCategory[];
   links: { label: string; url: string }[];
-  images: string[];
-  files?: { name: string; url: string }[];
+  
+  // Content Blocks - Component-Based with Data Configuration
+  contentBlocks: ContentBlock[];
 } 

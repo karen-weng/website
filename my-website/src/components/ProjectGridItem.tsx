@@ -1,4 +1,5 @@
 import type { Project } from '../types/project';
+import { getFirstImageFromContentBlocks } from '../utils/projectUtils';
 
 interface ProjectGridItemProps {
   project: Project;
@@ -64,7 +65,7 @@ const ProjectGridItem: React.FC<ProjectGridItemProps> = ({
       <div style={{ position: 'relative' }}>
         {/* Project Image */}
         <img
-          src={project.images[0]}
+          src={getFirstImageFromContentBlocks(project.contentBlocks) || '/placeholder.png'}
           alt={project.title}
           style={{
             width: '100%',

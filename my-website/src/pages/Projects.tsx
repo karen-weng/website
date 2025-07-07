@@ -3,97 +3,292 @@ import type { Project } from '../types/project';
 import ProjectFilters from '../components/ProjectFilters';
 import ProjectNavItem from '../components/ProjectNavItem';
 import ProjectGridItem from '../components/ProjectGridItem';
-import ProjectDetailView from '../components/ProjectDetailView';
+import FlexibleProjectDetailView from '../components/FlexibleProjectDetailView';
+
+/**
+ * Main Projects Page Component
+ * 
+ * Purpose: Orchestrates the entire projects interface
+ * 
+ * Architecture:
+ * - Left sidebar: Filter buttons + project navigation list
+ * - Right area: Grid view (default) or detailed project view
+ * - State management for filtering and project selection
+ * - Modular design using separate components for each UI piece
+ * 
+ * Implementation Details:
+ * - Uses OR filtering logic (projects shown if ANY tag matches enabled filters)
+ * - Reverse chronological sorting (newest first)
+ * - Clean component composition with clear separation of concerns
+ * - Enhanced project data with custom layouts and multiple images
+ */
 
 const projects: Project[] = [
   {
     id: 'no-name-hackathon',
     title: 'No Name Hackathon',
     year: 2024,
-    description: '295 project',
-    detailedDescription: 'A comprehensive shopping list application developed during the No Name Hackathon. This project showcases modern web development practices and user-centric design.',
-    techStack: ['React', 'Node.js', 'MongoDB'],
+    previewImage: '/project-images/noname2.png',
+    previewDescription: 'A comprehensive shopping list application developed during the No Name Hackathon. This project showcases modern web development practices and user-centric design.',
     category: ['software'],
     links: [{ label: 'GitHub', url: 'https://github.com/JakobStrozberg/no-name-shopping-list' }],
-    images: ['/project-images/noname2.png'],
-    files: [{ name: 'Project Report.pdf', url: '/project-files/noname-report.pdf' }]
+    contentBlocks: [
+      {
+        type: 'text',
+        content: 'A comprehensive shopping list application developed during the No Name Hackathon. This project showcases modern web development practices and user-centric design.',
+        size: 'large'
+      },
+      {
+        type: 'image',
+        src: '/project-images/noname1.png',
+        alt: 'App Screenshot',
+        caption: 'Main shopping list interface'
+      },
+      {
+        type: 'image',
+        src: '/project-images/noname2.png',
+        alt: 'App Screenshot',
+        caption: 'Main shopping list interface'
+      },
+      {
+        type: 'image',
+        src: '/project-images/noname3.png',
+        alt: 'App Screenshot',
+        caption: 'Main shopping list interface'
+      },
+      {
+        type: 'image',
+        src: '/project-images/noname4.png',
+        alt: 'App Screenshot',
+        caption: 'Main shopping list interface'
+      },
+      {
+        type: 'heading',
+        content: 'Key Features',
+        size: 'medium'
+      },
+      {
+        type: 'text',
+        content: '• Real-time collaborative shopping lists\n• Smart categorization of items\n• Cross-platform compatibility\n• Intuitive drag-and-drop interface'
+      }
+    ]
   },
   {
     id: 'formula-null',
     title: 'Third Place: Formula Null Hackathon',
     year: 2024,
-    description: '295 project',
-    detailedDescription: 'Hardware design project featuring advanced PCB design and embedded systems integration. Achieved third place in the competitive Formula Null Hackathon.',
-    techStack: ['Altium', 'C++', 'Embedded Systems'],
+    previewImage: '/project-images/toaster_third.png',
+    previewDescription: 'Hardware design project featuring advanced PCB design and embedded systems integration. Achieved third place in the competitive Formula Null Hackathon.',
     category: ['hardware'],
     links: [{ label: 'GitHub', url: 'https://github.com/WhosMadeer/ece295' }],
-    images: ['/project-images/toaster_third.png'],
-    files: [{ name: 'PCB Design Files.zip', url: '/project-files/formula-null-pcb.zip' }]
+    contentBlocks: [
+      {
+        type: 'text',
+        content: 'Hardware design project featuring advanced PCB design and embedded systems integration. Achieved third place in the competitive Formula Null Hackathon.',
+        size: 'large'
+      },
+      {
+        type: 'image',
+        content: { 
+          src: '/project-images/toaster_third.png', 
+          alt: 'Final PCB Design',
+          caption: 'Final PCB design with component placement'
+        },
+        align: 'center'
+      },
+      {
+        type: 'image',
+        content: { 
+          src: '/project-images/295pcb.png', 
+          alt: 'PCB Layout',
+          caption: 'Detailed PCB routing and traces'
+        },
+        align: 'center'
+      },
+      {
+        type: 'text',
+        content: 'Download: 📁 PCB Design Files.zip',
+        size: 'small'
+      }
+    ]
   },
   {
     id: 'pomodoro-timer',
     title: 'Pomodoro Timer',
     year: 2024,
-    description: 'A productivity timer built on FPGA.',
-    detailedDescription: 'An FPGA-based productivity timer implementing the Pomodoro Technique. Features custom RISC-V processor implementation and real-time task management.',
-    techStack: ['RISC-V', 'DE1-SoC', 'GDB', 'PowerShell', 'Verilog'],
+    previewImage: '/project-images/pomodoro.png',
+    previewDescription: 'A productivity timer built on FPGA.',
     category: ['hardware', 'software'],
     links: [
       { label: 'GitHub', url: 'https://github.com/karen-weng/Pomodoro' },
       { label: 'Demo', url: 'https://www.youtube.com/watch?v=0ngW_dFM08A' }
     ],
-    images: ['/project-images/pomodoro.png'],
-    files: [
-      { name: 'Verilog Source.zip', url: '/project-files/pomodoro-verilog.zip' },
-      { name: 'Demo Video.mp4', url: '/project-files/pomodoro-demo.mp4' }
+    contentBlocks: [
+      {
+        type: 'text',
+        content: 'An FPGA-based productivity timer implementing the Pomodoro Technique. Features custom RISC-V processor implementation and real-time task management.',
+        size: 'large'
+      },
+      {
+        type: 'divider',
+        style: 'dots'
+      },
+      {
+        type: 'image',
+        content: { 
+          src: '/project-images/pomodoro.png', 
+          alt: 'Pomodoro Timer',
+          caption: 'Timer running on DE1-SoC board'
+        }
+      },
+      {
+        type: 'heading',
+        content: 'Technical Implementation'
+      },
+      {
+        type: 'text',
+        content: 'This project implements a complete embedded system with custom RISC-V processor core, timer peripherals, and real-time display management.'
+      },
+      {
+        type: 'code',
+        content: `// Main timer state machine in Verilog
+always @(posedge clk) begin
+    if (reset) begin
+        timer_state <= IDLE;
+        minutes <= 8'd25;  // Default 25 minutes
+        seconds <= 8'd0;
+    end else begin
+        case (timer_state)
+            IDLE: if (start_btn) timer_state <= RUNNING;
+            RUNNING: begin
+                if (seconds == 0) begin
+                    if (minutes == 0) timer_state <= BREAK;
+                    else begin
+                        minutes <= minutes - 1;
+                        seconds <= 8'd59;
+                    end
+                end else seconds <= seconds - 1;
+            end
+        endcase
+    end
+end`
+      },
+      {
+        type: 'quote',
+        content: 'The beauty of FPGA development is having complete control over every clock cycle.',
+        size: 'large'
+      }
     ]
   },
-  {
+    {
     id: 'prime-pong',
     title: 'Third Place: Prime Pong - MakeUofT Hackathon',
     year: 2024,
-    description: 'Motion-controlled Pong game using ESP32.',
-    detailedDescription: 'An innovative motion-controlled Pong game that won third place at MakeUofT. Uses ESP32 microcontroller and MPU6050 accelerometer for intuitive paddle control.',
-    techStack: ['ESP32', 'MPU6050', 'C++', 'Arduino IDE'],
+    previewImage: '/project-images/primepongpaddle.png',
+    previewDescription: 'Motion-controlled Pong game using ESP32.',
     category: ['hardware', 'software'],
     links: [
-      { label: 'Devpost', url: 'https://devpost.com/software/primepong' },
+    { label: 'Devpost', url: 'https://devpost.com/software/primepong' },
       { label: 'GitHub', url: 'https://github.com/karen-weng/prime-pong' }
     ],
-    images: ['/project-images/primepongpaddle.png'],
-    files: [{ name: 'Source Code.zip', url: '/project-files/prime-pong-source.zip' }]
+    contentBlocks: [
+      {
+        type: 'text',
+        content: 'An innovative motion-controlled Pong game that won third place at MakeUofT. Uses ESP32 microcontroller and MPU6050 accelerometer for intuitive paddle control.',
+        size: 'large'
+      },
+      {
+        type: 'image',
+        content: { 
+          src: '/project-images/primepongpaddle.png', 
+          alt: 'Motion-controlled paddle',
+          caption: 'Custom paddle with embedded ESP32 and accelerometer'
+        },
+        align: 'center'
+      },
+      {
+        type: 'text',
+        content: 'The game uses real-time motion sensing to control paddles, creating an immersive gaming experience that bridges physical movement with digital gameplay.'
+      },
+      {
+        type: 'text',
+        content: 'Download: 📁 Source Code.zip',
+        size: 'small'
+      }
+    ]
   },
   {
     id: 'snake-game',
     title: 'Snake Game',
     year: 2023,
-    description: 'DE1-SoC FPGA project using Verilog',
-    detailedDescription: 'Classic Snake game implementation on DE1-SoC FPGA board. Features VGA output, PS/2 keyboard input, and custom graphics pipeline written entirely in Verilog.',
-    techStack: ['Verilog', 'DE1-SoC', 'VGA', 'PS/2'],
+    previewImage: '/project-images/snake.png',
+    previewDescription: 'DE1-SoC FPGA project using Verilog',
     category: ['hardware'],
     links: [
       { label: 'GitHub', url: 'https://github.com/karen-weng/Snake-Game' },
       { label: 'Demo', url: 'https://youtu.be/aTkcDn0pBpA' }
     ],
-    images: ['/project-images/snake.png'],
-    files: [{ name: 'Verilog HDL.zip', url: '/project-files/snake-verilog.zip' }]
+    contentBlocks: [
+      {
+        type: 'text',
+        content: 'Classic Snake game implementation on DE1-SoC FPGA board. Features VGA output, PS/2 keyboard input, and custom graphics pipeline written entirely in Verilog.',
+        size: 'large'
+      },
+      {
+        type: 'image',
+        content: { 
+          src: '/project-images/snake.png', 
+          alt: 'Snake Game Gameplay',
+          caption: 'Snake game running on VGA display'
+        },
+        align: 'center'
+      },
+      {
+        type: 'text',
+        content: 'Built from scratch using pure Verilog HDL with custom VGA controller and PS/2 keyboard interface for real-time gameplay.'
+      },
+      {
+        type: 'text',
+        content: 'Download: 📁 Verilog HDL.zip',
+        size: 'small'
+      }
+    ]
   },
   {
     id: 'hurricane-prediction',
     title: 'Atlantic Hurricane Path Prediction',
     year: 2023,
-    description: 'LSTM network using HURSAT dataset',
-    detailedDescription: 'Machine learning project for predicting Atlantic hurricane paths using LSTM neural networks. Trained on HURSAT satellite dataset with custom preprocessing pipeline.',
-    techStack: ['Python', 'TensorFlow', 'LSTM', 'HURSAT', 'Jupyter'],
+    previewImage: '/project-images/Debby.png',
+    previewDescription: 'LSTM network using HURSAT dataset',
     category: ['software'],
     links: [
       { label: 'GitHub', url: 'https://github.com/sovdeeth/asp-360-group-56' },
       { label: 'Demo', url: 'https://youtu.be/gwGoUBYasao' }
     ],
-    images: ['/project-images/Debby.png'],
-    files: [
-      { name: 'Research Paper.pdf', url: '/project-files/hurricane-paper.pdf' },
-      { name: 'Dataset Analysis.ipynb', url: '/project-files/hurricane-analysis.ipynb' }
+    contentBlocks: [
+      {
+        type: 'text',
+        content: 'Machine learning project for predicting Atlantic hurricane paths using LSTM neural networks. Trained on HURSAT satellite dataset with custom preprocessing pipeline.',
+        size: 'large'
+      },
+      {
+        type: 'image',
+        content: { 
+          src: '/project-images/Debby.png', 
+          alt: 'Hurricane Debby Path Prediction',
+          caption: 'Predicted vs actual path for Hurricane Debby'
+        },
+        align: 'center'
+      },
+      {
+        type: 'text',
+        content: 'Deep learning approach to hurricane trajectory forecasting using historical satellite data and temporal sequence modeling.'
+      },
+      {
+        type: 'text',
+        content: 'Downloads: 📁 Research Paper.pdf | 📁 Dataset Analysis.ipynb',
+        size: 'small'
+      }
     ]
   }
 ];
@@ -150,8 +345,8 @@ const Projects = () => {
       {/* Right Content Area */}
       <div style={{ flex: 1, paddingLeft: '2rem' }}>
         {selectedProject ? (
-          // Detailed Project View
-          <ProjectDetailView
+          // Using the new FlexibleProjectDetailView
+          <FlexibleProjectDetailView
             project={selectedProject}
             onBack={() => setSelectedProject(null)}
           />

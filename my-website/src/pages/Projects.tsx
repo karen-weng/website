@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 import type { Project } from '../types/project';
 import ProjectFilters from '../components/ProjectFilters';
 import ProjectNavItem from '../components/ProjectNavItem';
@@ -8,12 +9,13 @@ import FlexibleProjectDetailView from '../components/FlexibleProjectDetailView';
 /**
  * Main Projects Page Component
  * 
- * Purpose: Orchestrates the entire projects interface
+ * Purpose: Orchestrates the entire projects interface with URL routing
  * 
  * Architecture:
  * - Left sidebar: Filter buttons + project navigation list
  * - Right area: Grid view (default) or detailed project view
  * - State management for filtering and project selection
+ * - URL-based routing: /projects shows grid, /projects/:projectId shows specific project
  * - Modular design using separate components for each UI piece
  * 
  * Implementation Details:
@@ -21,6 +23,7 @@ import FlexibleProjectDetailView from '../components/FlexibleProjectDetailView';
  * - Reverse chronological sorting (newest first)
  * - Clean component composition with clear separation of concerns
  * - Enhanced project data with custom layouts and multiple images
+ * - Each project gets its own shareable URL
  */
 
 const projects: Project[] = [
@@ -29,47 +32,62 @@ const projects: Project[] = [
     title: 'No Name Hackathon',
     year: 2025,
     previewImage: '/project-images/no-name/noname2.png',
-    previewDescription: 'A comprehensive shopping list application developed during the No Name Hackathon. This project showcases modern web development practices and user-centric design.',
+    techStack: ['React', 'TypeScript', 'Node.js'],
     category: ['software'],
     links: [{ label: 'GitHub', url: 'https://github.com/JakobStrozberg/no-name-shopping-list' }],
     contentBlocks: [
       {
         type: 'text',
-        content: 'A comprehensive shopping list application developed during the No Name Hackathon. This project showcases modern web development practices and user-centric design.',
+        content: 'During Toronto Tech Week for 2025 I attended a NoName/ Loblaws Hackathon hosted with OpenSesame. We were given a problem statement to create a product that incorporates 3 main components:\n\n1. Social\n2. Loyalty\n3. Rewards \n\nWe thought about how we make the users shopping experience social and based off what we would actually use. We designed a smart mobile shopping list that you can collaborate with your family or friends. First you login with your email and can create/ join a family with a code.',
         size: 'large'
       },
       {
         type: 'image',
         src: '/project-images/no-name/noname1.png',
         alt: 'App Screenshot',
-        caption: 'Main shopping list interface'
+        caption: 'Main shopping list interface - large size',
+        imageSize: 'small',
+        align: 'center'
       },
       {
-        type: 'image',
-        src: '/project-images/no-name/noname2.png',
-        alt: 'App Screenshot',
-        caption: 'Main shopping list interface'
+        type: 'text',
+        content: 'You can collaborate on a list where anyone can add items, comments, and likes on each other. When you add item it gives you options that are available at loblaws stores. You also get smart suggestions for other items you might want based on your current list powered by chatgpt. In addition that is an in app chat in.',
+        size: 'large'
       },
       {
-        type: 'image',
-        src: '/project-images/no-name/noname3.png',
-        alt: 'App Screenshot',
-        caption: 'Main shopping list interface'
+        type: 'imageGrid',
+        images: [
+          {
+            src: '/project-images/no-name/noname2.png',
+            alt: 'App Interface 2',
+            caption: 'Shopping list view'
+          },
+          {
+            src: '/project-images/no-name/noname3.png',
+            alt: 'App Interface 3',
+            caption: 'Item management'
+          }
+        ],
+        gridColumns: 2,
+        imageSize: 'medium',
+        align: 'center'
+      },
+      {
+        type: 'text',
+        content: 'Together as a family you earn rewards towards actual prized at lob laws such as the kitchenware set. ',
+        size: 'large'
       },
       {
         type: 'image',
         src: '/project-images/no-name/noname4.png',
         alt: 'App Screenshot',
-        caption: 'Main shopping list interface'
-      },
-      {
-        type: 'heading',
-        content: 'Key Features',
-        size: 'medium'
+        caption: 'Extra small example - between thumbnail and small',
+        imageSize: 'small',
+        align: 'center'
       },
       {
         type: 'text',
-        content: '• Real-time collaborative shopping lists\n• Smart categorization of items\n• Cross-platform compatibility\n• Intuitive drag-and-drop interface'
+        content: 'Your shopping list, chat history, family members, and rewards are saving the firebase database and you are able to export the list to share with other people. '
       }
     ]
   },
@@ -78,7 +96,7 @@ const projects: Project[] = [
     title: '3rd Place: Formula Null Hackathon',
     year: 2025,
     previewImage: '/project-images/formula-null/toaster_third.png',
-    previewDescription: 'Hardware design project featuring advanced PCB design and embedded systems integration. Achieved third place in the competitive Formula Null Hackathon.',
+    techStack: ['PCB Design', 'Embedded C', 'KiCad'],
     category: ['hardware'],
     links: [{ label: 'GitHub', url: 'https://github.com/WhosMadeer/ece295' }],
     contentBlocks: [
@@ -109,8 +127,8 @@ const projects: Project[] = [
         type: 'image',
         content: { 
           src: '/project-images/formula-null/trashmech_team.webp', 
-          alt: 'PCB Layout',
-          caption: 'Detailed PCB routing and traces'
+          alt: 'Team Photo',
+          caption: 'Team collaboration and development process'
         },
         align: 'center'
       },
@@ -123,10 +141,10 @@ const projects: Project[] = [
   },
   {
     id: 'ECE295',
-    title: 'Software Defined Radio Reciever',
+    title: 'Software Defined Radio Receiver',
     year: 2025,
     previewImage: '/project-images/ECE295/pcb.png',
-    previewDescription: 'A productivity timer built on FPGA.',
+    techStack: ['FPGA', 'Verilog', 'Signal Processing'],
     category: ['hardware', 'software'],
     links: [
       { label: 'GitHub', url: 'https://github.com/karen-weng/Pomodoro' },
@@ -135,7 +153,7 @@ const projects: Project[] = [
     contentBlocks: [
       {
         type: 'text',
-        content: 'An FPGA-based productivity timer implementing the Pomodoro Technique. Features custom RISC-V processor implementation and real-time task management.',
+        content: 'Software Defined Radio implementation on FPGA hardware. Features custom signal processing pipeline and real-time demodulation capabilities.',
         size: 'large'
       },
       {
@@ -146,8 +164,8 @@ const projects: Project[] = [
         type: 'image',
         content: { 
           src: '/project-images/ECE295/pcb.png', 
-          alt: 'Pomodoro Timer',
-          caption: 'Timer running on DE1-SoC board'
+          alt: 'SDR PCB',
+          caption: 'Custom PCB design for radio frequency processing'
         }
       },
       {
@@ -156,11 +174,11 @@ const projects: Project[] = [
       },
       {
         type: 'text',
-        content: 'This project implements a complete embedded system with custom RISC-V processor core, timer peripherals, and real-time display management.'
+        content: 'This project implements a complete software-defined radio system with custom FPGA-based signal processing, digital filters, and real-time demodulation algorithms.'
       },
       {
         type: 'quote',
-        content: 'The beauty of FPGA development is having complete control over every clock cycle.',
+        content: 'Software-defined radio bridges the gap between digital signal processing and RF communication.',
         size: 'large'
       }
     ]
@@ -170,7 +188,7 @@ const projects: Project[] = [
     title: 'Pomodoro Timer',
     year: 2025,
     previewImage: '/project-images/pomodoro/pomodoro.png',
-    previewDescription: 'A productivity timer built on FPGA.',
+    techStack: ['FPGA', 'RISC-V', 'Verilog'],
     category: ['hardware', 'software'],
     links: [
       { label: 'GitHub', url: 'https://github.com/karen-weng/Pomodoro' },
@@ -214,7 +232,7 @@ const projects: Project[] = [
     title: '3rd Place: Prime Pong - MakeUofT Hackathon',
     year: 2025,
     previewImage: '/project-images/prime-pong/primepongpaddle.png',
-    previewDescription: 'Motion-controlled Pong game using ESP32.',
+    techStack: ['ESP32', 'C++', 'MPU6050'],
     category: ['hardware', 'software'],
     links: [
     { label: 'Devpost', url: 'https://devpost.com/software/primepong' },
@@ -251,7 +269,7 @@ const projects: Project[] = [
     title: 'Snake Game',
     year: 2024,
     previewImage: '/project-images/snake/snake.png',
-    previewDescription: 'DE1-SoC FPGA project using Verilog',
+    techStack: ['Verilog', 'FPGA', 'VGA'],
     category: ['hardware'],
     links: [
       { label: 'GitHub', url: 'https://github.com/karen-weng/Snake-Game' },
@@ -276,8 +294,8 @@ const projects: Project[] = [
         type: 'image',
         content: { 
           src: '/project-images/snake/snake_block.png', 
-          alt: 'Snake Game Gameplay',
-          caption: 'Snake game running on VGA display'
+          alt: 'Snake Game Architecture',
+          caption: 'Hardware block diagram and system architecture'
         },
         align: 'center'
       },
@@ -297,7 +315,7 @@ const projects: Project[] = [
     title: 'Atlantic Hurricane Path Prediction',
     year: 2024,
     previewImage: '/project-images/APS360/Debby.png',
-    previewDescription: 'LSTM network using HURSAT dataset',
+    techStack: ['Python', 'PyTorch', 'LSTM'],
     category: ['software'],
     links: [
       { label: 'GitHub', url: 'https://github.com/sovdeeth/asp-360-group-56' },
@@ -322,8 +340,8 @@ const projects: Project[] = [
         type: 'image',
         content: { 
           src: '/project-images/APS360/Ernesto.png', 
-          alt: 'Hurricane Debby Path Prediction',
-          caption: 'Predicted vs actual path for Hurricane Debby'
+          alt: 'Hurricane Ernesto Path Prediction',
+          caption: 'Predicted vs actual path for Hurricane Ernesto'
         },
         align: 'center'
       },
@@ -341,13 +359,19 @@ const projects: Project[] = [
 ];
 
 const Projects = () => {
+  // URL routing hooks
+  const { projectId } = useParams<{ projectId: string }>();
+  const navigate = useNavigate();
+  
   // State management
-  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [showHardware, setShowHardware] = useState(true);
   const [showSoftware, setShowSoftware] = useState(true);
 
   // Data processing
   const sortedProjects = [...projects].sort((a, b) => b.year - a.year);
+  
+  // Find selected project based on URL parameter
+  const selectedProject = projectId ? projects.find(p => p.id === projectId) || null : null;
   
   // Filtering logic: Show project if ANY of its categories match enabled filters
   const filteredProjects = sortedProjects.filter(project => {
@@ -359,6 +383,15 @@ const Projects = () => {
     
     return showForHardware || showForSoftware;
   });
+
+  // Navigation functions
+  const handleProjectSelect = (project: Project) => {
+    navigate(`/projects/${project.id}`);
+  };
+
+  const handleBackToGrid = () => {
+    navigate('/projects');
+  };
 
   return (
     <div style={{ display: 'flex', height: '100vh', padding: '1rem' }}>
@@ -384,7 +417,7 @@ const Projects = () => {
             key={project.id}
             project={project}
             isSelected={selectedProject?.id === project.id}
-            onClick={() => setSelectedProject(project)}
+            onClick={() => handleProjectSelect(project)}
           />
         ))}
       </div>
@@ -395,7 +428,7 @@ const Projects = () => {
           // Using the new FlexibleProjectDetailView
           <FlexibleProjectDetailView
             project={selectedProject}
-            onBack={() => setSelectedProject(null)}
+            onBack={handleBackToGrid}
           />
         ) : (
           // Grid View
@@ -410,7 +443,7 @@ const Projects = () => {
                 <ProjectGridItem
                   key={project.id}
                   project={project}
-                  onClick={() => setSelectedProject(project)}
+                  onClick={() => handleProjectSelect(project)}
                 />
               ))}
             </div>

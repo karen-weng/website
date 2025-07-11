@@ -1,5 +1,5 @@
 import type { Project, ContentBlock } from '../types/project';
-import { TextBlock, ImageBlock, HeadingBlock, CodeBlock, QuoteBlock, DividerBlock } from './contentBlocks';
+import { TextBlock, ImageBlock, ImageGridBlock, HeadingBlock, CodeBlock, QuoteBlock, DividerBlock } from './contentBlocks';
 
 interface FlexibleProjectDetailViewProps {
   project: Project;
@@ -13,7 +13,9 @@ interface FlexibleProjectDetailViewProps {
  * 
  * Features:
  * - Content blocks can be arranged in ANY order
- * - Support for text, images, headings, code, quotes, dividers
+ * - Support for text, images, image grids, headings, code, quotes, dividers
+ * - Image size control (thumbnail, small, medium, large, full-width)
+ * - Grid layout control for multiple images per row
  * - Easy configuration through project data
  * - No fixed layout - you define exactly what appears where
  * - Clean header with title and year, immediate access to links
@@ -58,6 +60,18 @@ const FlexibleProjectDetailView: React.FC<FlexibleProjectDetailViewProps> = ({
             alt={imageAlt || ''}
             caption={imageCaption}
             align={block.align}
+            imageSize={block.imageSize}
+          />
+        );
+      
+      case 'imageGrid':
+        return (
+          <ImageGridBlock 
+            key={index}
+            images={block.images || []}
+            gridColumns={block.gridColumns}
+            align={block.align}
+            imageSize={block.imageSize}
           />
         );
       

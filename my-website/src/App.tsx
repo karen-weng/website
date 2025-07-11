@@ -45,8 +45,6 @@ import Personal from './pages/Personal';
 import Contact from './pages/Contact';
 import Navbar from './components/navbar';
 
-
-
 function App() {
   return (
     <div>
@@ -54,6 +52,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/projects" element={<Projects />} />
+        <Route path="/projects/:projectId" element={<Projects />} />
         <Route path="/personal" element={<Personal />} />
         <Route path="/contact" element={<Contact />} />
       </Routes>

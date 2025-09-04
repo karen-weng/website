@@ -1,0 +1,83 @@
+      {/* Projects Section */}
+      <section id="projects" style={{ minHeight: '100vh', padding: '1rem', position: 'relative' }}>
+        <div style={{ display: 'flex', minHeight: '100vh' }}>
+          {/* Left Sidebar */}
+          <div style={{ 
+            width: '300px', 
+            borderRight: '1px solid #e0e0e0', 
+            paddingRight: '1rem',
+            overflowY: 'auto',
+            maxHeight: '100vh',
+            position: 'sticky',
+            top: '0'
+          }}>
+            {/* Filter Controls */}
+            <ProjectFilters
+              showHardware={showHardware}
+              showSoftware={showSoftware}
+              onToggleHardware={() => setShowHardware(!showHardware)}
+              onToggleSoftware={() => setShowSoftware(!showSoftware)}
+            />
+
+            {/* Projects Navigation List */}
+            <h2 style={{ marginBottom: '1rem', color: '#333' }}>Projects</h2>
+            {filteredProjects.map(project => (
+              <ProjectNavItem
+                key={project.id}
+                project={project}
+                isSelected={selectedProject?.id === project.id}
+                onClick={() => handleProjectSelect(project)}
+              />
+            ))}
+          </div>
+
+          {/* Right Content Area */}
+          <div style={{ flex: 1, paddingLeft: '2rem', overflowY: 'auto', maxHeight: '100vh' }}>
+            {selectedProject ? (
+              // Using the new FlexibleProjectDetailView
+              <FlexibleProjectDetailView
+                project={selectedProject}
+                onBack={handleBackToGrid}
+              />
+            ) : (
+              // Grid View
+              <div>
+                <h1 style={{ marginBottom: '2rem', textAlign: 'center' }}>My Projects</h1>
+                <div style={{ 
+                  display: 'grid', 
+                  gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', 
+                  gap: '1.5rem' 
+                }}>
+                  {filteredProjects.map(project => (
+                    <ProjectGridItem
+                      key={project.id}
+                      project={project}
+                      onClick={() => handleProjectSelect(project)}
+                    />
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+        
+        {/* Scroll indicator */}
+        <div style={{
+          position: 'absolute',
+          bottom: '20px',
+          left: '50%',
+          transform: 'translateX(-50%)',
+          textAlign: 'center',
+          color: '#666',
+          fontSize: '0.9rem'
+        }}>
+          <div style={{ marginBottom: '8px' }}>Scroll down to explore more</div>
+          <div style={{
+            width: '2px',
+            height: '20px',
+            backgroundColor: '#666',
+            margin: '0 auto',
+            animation: 'scrollBounce 2s infinite'
+          }}></div>
+        </div>
+      </section>

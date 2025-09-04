@@ -11,7 +11,8 @@ const TextBlock: React.FC<TextBlockProps> = ({ content, size = 'medium', align =
         marginBottom: '1.5rem',
         textAlign: align,
         fontSize: size === 'large' ? '1.2rem' : size === 'small' ? '0.9rem' : '1rem',
-        lineHeight: '1.6'
+        lineHeight: '1.6',
+        whiteSpace: 'pre-line' // This preserves line breaks from \n characters
       }}
     >
       {content}

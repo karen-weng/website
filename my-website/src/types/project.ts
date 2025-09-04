@@ -9,7 +9,7 @@ export type ProjectCategory = 'hardware' | 'software';
 
 // Content Block System - Clean Component-Based Architecture
 export interface ContentBlock {
-  type: 'text' | 'image' | 'heading' | 'code' | 'quote' | 'divider';
+  type: 'text' | 'image' | 'imageGrid' | 'heading' | 'code' | 'quote' | 'divider';
   content?: any;       // For text, heading, code, quote content
   src?: string;        // For images
   alt?: string;        // For images
@@ -17,14 +17,22 @@ export interface ContentBlock {
   size?: 'small' | 'medium' | 'large';
   align?: 'left' | 'center' | 'right';
   style?: 'line' | 'space' | 'dots'; // For dividers
+  
+  // Image-specific properties
+  imageSize?: 'thumbnail' | 'extra-small' | 'small' | 'medium' | 'large' | 'full-width';
+  images?: Array<{     // For imageGrid type
+    src: string;
+    alt: string;
+    caption?: string;
+  }>;
+  gridColumns?: number; // How many images per row (for imageGrid)
 }
 
 export interface Project {
   id: string;
   title: string;
   year: number;
-  description: string;
-  detailedDescription: string;
+  previewImage: string;
   techStack: string[];
   category: ProjectCategory[];
   links: { label: string; url: string }[];

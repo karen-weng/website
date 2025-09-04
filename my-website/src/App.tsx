@@ -4,8 +4,6 @@
 // import './App.css'
 
 // function App() {
-//   const [count, setCount] = useState(0)
-
 //   return (
 //     <>
 //       <div>
@@ -18,9 +16,7 @@
 //       </div>
 //       <h1>Vite + React</h1>
 //       <div className="card">
-//         <button onClick={() => setCount((count) => count + 1)}>
-//           count is {count}
-//         </button>
+//         <button onClick={() => setCount((count) => count + 1)}>count is {count}</button>
 //         <p>
 //           Edit <code>src/App.tsx</code> and save to test HMR
 //         </p>
@@ -34,28 +30,17 @@
 
 // export default App
 
-
-
-// import React from 'react';
 import { Routes, Route } from 'react-router-dom';
-
-import Home from './pages/Home';
-import Projects from './pages/Projects';
-import Personal from './pages/Personal';
-import Contact from './pages/Contact';
+import MainPage from './pages/MainPage';
 import Navbar from './components/navbar';
-
-
 
 function App() {
   return (
     <div>
       <Navbar />
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/projects" element={<Projects />} />
-        <Route path="/personal" element={<Personal />} />
-        <Route path="/contact" element={<Contact />} />
+        <Route path="/" element={<MainPage />} />
+        <Route path="/projects/:projectId" element={<MainPage />} />
       </Routes>
     </div>
   );

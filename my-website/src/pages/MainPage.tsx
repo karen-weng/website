@@ -5,27 +5,10 @@ import ProjectFilters from '../components/ProjectFilters';
 import ProjectNavItem from '../components/ProjectNavItem';
 import ProjectGridItem from '../components/ProjectGridItem';
 import FlexibleProjectDetailView from '../components/FlexibleProjectDetailView';
+import { MapWithPins } from "../components/MapPins";
+import { BucketList } from "../components/BucketList";
 
-/**
- * Main Projects Page Component
- * 
- * Purpose: Orchestrates the entire projects interface with URL routing
- * 
- * Architecture:
- * - Left sidebar: Filter buttons + project navigation list
- * - Right area: Grid view (default) or detailed project view
- * - State management for filtering and project selection
- * - URL-based routing: /projects shows grid, /projects/:projectId shows specific project
- * - Modular design using separate components for each UI piece
- * 
- * Implementation Details:
- * - Uses OR filtering logic (projects shown if ANY tag matches enabled filters)
- * - Reverse chronological sorting (newest first)
- * - Clean component composition with clear separation of concerns
- * - Enhanced project data with custom layouts and multiple images
- * - Each project gets its own shareable URL
- */
-
+// Import the projects data
 const projects: Project[] = [
   {
     id: 'no-name',
@@ -107,29 +90,23 @@ const projects: Project[] = [
       },
       {
         type: 'image',
-        content: { 
-          src: '/project-images/formula-null/toaster_third.png', 
-          alt: 'Final PCB Design',
-          caption: 'Final PCB design with component placement'
-        },
+        src: '/project-images/formula-null/toaster_third.png',
+        alt: 'Final PCB Design',
+        caption: 'Final PCB design with component placement',
         align: 'center'
       },
       {
         type: 'image',
-        content: { 
-          src: '/project-images/formula-null/toaster_lineup.webp', 
-          alt: 'PCB Layout',
-          caption: 'Detailed PCB routing and traces'
-        },
+        src: '/project-images/formula-null/toaster_lineup.webp',
+        alt: 'PCB Layout',
+        caption: 'Detailed PCB routing and traces',
         align: 'center'
       },
       {
         type: 'image',
-        content: { 
-          src: '/project-images/formula-null/trashmech_team.webp', 
-          alt: 'Team Photo',
-          caption: 'Team collaboration and development process'
-        },
+        src: '/project-images/formula-null/trashmech_team.webp',
+        alt: 'Team Photo',
+        caption: 'Team collaboration and development process',
         align: 'center'
       },
       {
@@ -162,11 +139,9 @@ const projects: Project[] = [
       },
       {
         type: 'image',
-        content: { 
-          src: '/project-images/ECE295/pcb.png', 
-          alt: 'SDR PCB',
-          caption: 'Custom PCB design for radio frequency processing'
-        }
+        src: '/project-images/ECE295/pcb.png',
+        alt: 'SDR PCB',
+        caption: 'Custom PCB design for radio frequency processing'
       },
       {
         type: 'heading',
@@ -206,11 +181,9 @@ const projects: Project[] = [
       },
       {
         type: 'image',
-        content: { 
-          src: '/project-images/pomodoro/pomodoro.png', 
-          alt: 'Pomodoro Timer',
-          caption: 'Timer running on DE1-SoC board'
-        }
+        src: '/project-images/pomodoro/pomodoro.png',
+        alt: 'Pomodoro Timer',
+        caption: 'Timer running on DE1-SoC board'
       },
       {
         type: 'heading',
@@ -246,11 +219,9 @@ const projects: Project[] = [
       },
       {
         type: 'image',
-        content: { 
-          src: '/project-images/prime-pong/primepongpaddle.png', 
-          alt: 'Motion-controlled paddle',
-          caption: 'Custom paddle with embedded ESP32 and accelerometer'
-        },
+        src: '/project-images/prime-pong/primepongpaddle.png',
+        alt: 'Motion-controlled paddle',
+        caption: 'Custom paddle with embedded ESP32 and accelerometer',
         align: 'center'
       },
       {
@@ -283,20 +254,16 @@ const projects: Project[] = [
       },
       {
         type: 'image',
-        content: { 
-          src: '/project-images/snake/snake.png', 
-          alt: 'Snake Game Gameplay',
-          caption: 'Snake game running on VGA display'
-        },
+        src: '/project-images/snake/snake.png',
+        alt: 'Snake Game Gameplay',
+        caption: 'Snake game running on VGA display',
         align: 'center'
       },
       {
         type: 'image',
-        content: { 
-          src: '/project-images/snake/snake_block.png', 
-          alt: 'Snake Game Architecture',
-          caption: 'Hardware block diagram and system architecture'
-        },
+        src: '/project-images/snake/snake_block.png',
+        alt: 'Snake Game Architecture',
+        caption: 'Hardware block diagram and system architecture',
         align: 'center'
       },
       {
@@ -329,20 +296,16 @@ const projects: Project[] = [
       },
       {
         type: 'image',
-        content: { 
-          src: '/project-images/APS360/Debby.png', 
-          alt: 'Hurricane Debby Path Prediction',
-          caption: 'Predicted vs actual path for Hurricane Debby'
-        },
+        src: '/project-images/APS360/Debby.png',
+        alt: 'Hurricane Debby Path Prediction',
+        caption: 'Predicted vs actual path for Hurricane Debby',
         align: 'center'
       },
       {
         type: 'image',
-        content: { 
-          src: '/project-images/APS360/Ernesto.png', 
-          alt: 'Hurricane Ernesto Path Prediction',
-          caption: 'Predicted vs actual path for Hurricane Ernesto'
-        },
+        src: '/project-images/APS360/Ernesto.png',
+        alt: 'Hurricane Ernesto Path Prediction',
+        caption: 'Predicted vs actual path for Hurricane Ernesto',
         align: 'center'
       },
       {
@@ -358,7 +321,7 @@ const projects: Project[] = [
   }
 ];
 
-const Projects = () => {
+const MainPage = () => {
   // URL routing hooks
   const { projectId } = useParams<{ projectId: string }>();
   const navigate = useNavigate();
@@ -390,68 +353,165 @@ const Projects = () => {
   };
 
   const handleBackToGrid = () => {
-    navigate('/projects');
+    navigate('/');
+    // Scroll to projects section after navigation
+    setTimeout(() => {
+      const projectsSection = document.getElementById('projects');
+      if (projectsSection) {
+        projectsSection.scrollIntoView({ behavior: 'smooth' });
+      }
+    }, 100);
+  };
+
+  // Scroll to section function
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
   };
 
   return (
-    <div style={{ display: 'flex', height: '100vh', padding: '1rem' }}>
-      {/* Left Sidebar */}
-      <div style={{ 
-        width: '300px', 
-        borderRight: '1px solid #e0e0e0', 
-        paddingRight: '1rem',
-        overflowY: 'auto'
-      }}>
-        {/* Filter Controls */}
-        <ProjectFilters
-          showHardware={showHardware}
-          showSoftware={showSoftware}
-          onToggleHardware={() => setShowHardware(!showHardware)}
-          onToggleSoftware={() => setShowSoftware(!showSoftware)}
-        />
+    <div>
+      {/* Projects Section */}
+      <section id="projects" style={{ minHeight: '100vh', padding: '1rem', position: 'relative' }}>
+        <div style={{ display: 'flex', minHeight: '100vh' }}>
+          {/* Left Sidebar */}
+          <div style={{ 
+            width: '300px', 
+            borderRight: '1px solid #e0e0e0', 
+            paddingRight: '1rem',
+            overflowY: 'auto', maxHeight: '100vh', position: 'sticky', top: '0'
+          }}>
+            {/* Filter Controls */}
+            <ProjectFilters
+              showHardware={showHardware}
+              showSoftware={showSoftware}
+              onToggleHardware={() => setShowHardware(!showHardware)}
+              onToggleSoftware={() => setShowSoftware(!showSoftware)}
+            />
 
-        {/* Projects Navigation List */}
-        <h2 style={{ marginBottom: '1rem', color: '#333' }}>Projects</h2>
-        {filteredProjects.map(project => (
-          <ProjectNavItem
-            key={project.id}
-            project={project}
-            isSelected={selectedProject?.id === project.id}
-            onClick={() => handleProjectSelect(project)}
-          />
-        ))}
-      </div>
-
-      {/* Right Content Area */}
-      <div style={{ flex: 1, paddingLeft: '2rem' }}>
-        {selectedProject ? (
-          // Using the new FlexibleProjectDetailView
-          <FlexibleProjectDetailView
-            project={selectedProject}
-            onBack={handleBackToGrid}
-          />
-        ) : (
-          // Grid View
-          <div>
-            <h1 style={{ marginBottom: '2rem', textAlign: 'center' }}>My Projects</h1>
-            <div style={{ 
-              display: 'grid', 
-              gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', 
-              gap: '1.5rem' 
-            }}>
-              {filteredProjects.map(project => (
-                <ProjectGridItem
-                  key={project.id}
-                  project={project}
-                  onClick={() => handleProjectSelect(project)}
-                />
-              ))}
-            </div>
+            {/* Projects Navigation List */}
+            <h2 style={{ marginBottom: '1rem', color: '#333' }}>Projects</h2>
+            {filteredProjects.map(project => (
+              <ProjectNavItem
+                key={project.id}
+                project={project}
+                isSelected={selectedProject?.id === project.id}
+                onClick={() => handleProjectSelect(project)}
+              />
+            ))}
           </div>
-        )}
-      </div>
+
+          {/* Right Content Area */}
+          <div style={{ flex: 1, paddingLeft: '2rem', overflowY: 'auto', maxHeight: '100vh' }}>
+            {selectedProject ? (
+              // Using the new FlexibleProjectDetailView
+              <FlexibleProjectDetailView
+                project={selectedProject}
+                onBack={handleBackToGrid}
+              />
+            ) : (
+              // Grid View
+              <div>
+                <h1 style={{ marginBottom: '2rem', textAlign: 'center' }}>My Projects</h1>
+                <div style={{ 
+                  display: 'grid', 
+                  gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', 
+                  gap: '1.5rem' 
+                }}>
+                  {filteredProjects.map(project => (
+                    <ProjectGridItem
+                      key={project.id}
+                      project={project}
+                      onClick={() => handleProjectSelect(project)}
+                    />
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+        
+      </section>
+
+      {/* Section Divider */}
+      <div style={{
+        height: '4px',
+        background: 'linear-gradient(90deg, transparent, #e0e0e0, transparent)',
+        margin: '0'
+      }}></div>
+
+      {/* Personal Section */}
+      <section id="personal" style={{ minHeight: '100vh', padding: '2rem', backgroundColor: '#f8f9fa' }}>
+        <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
+          <h1 style={{ textAlign: 'center', marginBottom: '2rem', color: '#333' }}>Personal Section</h1>
+          <MapWithPins />
+          <BucketList />
+        </div>
+      </section>
+
+      {/* Section Divider */}
+      <div style={{
+        height: '4px',
+        background: 'linear-gradient(90deg, transparent, #e0e0e0, transparent)',
+        margin: '0'
+      }}></div>
+
+      {/* Contact Section */}
+      <section id="contact" style={{ minHeight: '100vh', padding: '4rem 2rem', backgroundColor: '#f5f5f5' }}>
+        <div style={{ maxWidth: '800px', margin: '0 auto', textAlign: 'center' }}>
+          <h2 style={{ fontSize: '2rem', marginBottom: '1rem', color: '#222' }}>Let's Connect!</h2>
+          <p style={{ fontSize: '1rem', color: '#555', marginBottom: '2rem' }}>
+            Feel free to reach out for collaborations, project discussions, or just to say hi!
+          </p>
+          <div>
+            <a 
+              href="mailto:karen.wengxt@gmail.com" 
+              style={linkButtonStyle}>
+              Email Me
+            </a>
+            <a 
+              href="https://www.linkedin.com/in/karen-weng-402bab295/" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              style={linkButtonStyle}>
+              LinkedIn
+            </a>
+            <a 
+              href="https://github.com/karen-weng" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              style={linkButtonStyle}>
+              GitHub
+            </a>
+            <a 
+              href="/Karen_Weng_Resume.pdf"
+              target="_blank" 
+              rel="noopener noreferrer" 
+              style={linkButtonStyle}
+              download="Karen_Weng_Resume.pdf"
+              >
+              Download Resume
+            </a>
+          </div>
+        </div>
+      </section>
     </div>
   );
 };
 
-export default Projects;
+const linkButtonStyle = {
+  display: 'inline-block',
+  margin: '8px',
+  padding: '12px 24px',
+  backgroundColor: '#333',
+  color: '#fff',
+  borderRadius: '8px',
+  textDecoration: 'none',
+  cursor: 'pointer',
+  transition: 'transform 0.2s ease, background-color 0.3s ease',
+  fontSize: '1rem'
+};
+
+export default MainPage; 

@@ -1,54 +1,41 @@
-# React + TypeScript + Vite
+# My Website
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A personal portfolio website showcasing my projects, personal interests, and contact information.
 
-Currently, two official plugins are available:
+## Structure
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+The website is now a single-page application with three main sections:
 
-## Expanding the ESLint configuration
+1. **Projects Section** - The main landing area featuring a grid of my projects with filtering capabilities
+2. **Personal Section** - Interactive map and bucket list showcasing my interests and travels
+3. **Contact Section** - Contact information and links to my professional profiles
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Features
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+- **Single Page Design**: All content is on one page with smooth scrolling between sections
+- **Project Showcase**: Interactive project grid with hardware/software filtering
+- **Project Details**: Detailed project views with rich content blocks (text, images, grids, quotes, etc.)
+- **Responsive Design**: Works on desktop and mobile devices
+- **Smooth Navigation**: Sticky navbar with smooth scrolling to sections
+- **Modern UI**: Clean, professional design with subtle animations
+
+## Navigation
+
+- **Projects**: Jump to the projects section
+- **Personal**: Jump to the personal section with map and bucket list
+- **Contact**: Jump to the contact section
+
+## Development
+
+```bash
+npm install
+npm run dev
+npm run build
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Technologies
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+- React + TypeScript
+- Vite for build tooling
+- CSS-in-JS for styling
+- React Router for project detail navigation

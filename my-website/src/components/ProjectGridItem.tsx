@@ -1,5 +1,4 @@
 import type { Project } from '../types/project';
-import { getFirstImageFromContentBlocks } from '../utils/projectUtils';
 
 interface ProjectGridItemProps {
   project: Project;
@@ -12,12 +11,13 @@ interface ProjectGridItemProps {
  * Purpose: Renders individual project cards in the grid view
  * 
  * Implementation:
- * - Displays project image with hover effects
+ * - Displays project preview image with hover effects
  * - Color-coded underlines matching the navbar style
  * - Image darkens on hover and shows project title overlay
  * - Scales up slightly on hover for interactive feedback
  * - No text below image (clean grid appearance)
  * - Responsive grid layout support
+ * - Uses previewImage field for customizable preview selection
  */
 const ProjectGridItem: React.FC<ProjectGridItemProps> = ({
   project,
@@ -63,9 +63,9 @@ const ProjectGridItem: React.FC<ProjectGridItemProps> = ({
       }}
     >
       <div style={{ position: 'relative' }}>
-        {/* Project Image */}
+        {/* Project Preview Image */}
         <img
-          src={getFirstImageFromContentBlocks(project.contentBlocks) || '/placeholder.png'}
+          src={project.previewImage}
           alt={project.title}
           style={{
             width: '100%',
